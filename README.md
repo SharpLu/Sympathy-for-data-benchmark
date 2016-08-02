@@ -20,7 +20,7 @@ Contents
 	
 
 1 .  Sympathy for data platform Spark as engine 
-If you experience any problem, please contact fenlu@kth.se   reply within 24hours.
+If you experience any problem, please contact me, reply within 24hours.
 
 1 . First make sure VMware workstation 12 pro or Virtualbox  has installed , then use your VM open the virtual machine.(Virtual machine.zip)
 2 . Uncompress the Python Library.zip files to your Sympathy for data library folder(Example below)
