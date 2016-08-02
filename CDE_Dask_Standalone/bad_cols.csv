@@ -1,0 +1,4 @@
+Value;Operator;Column
+"'$PAUSE_COMMENTS'";equal;Parameter
+"'$CalibrationLog\ETKC:1'";equal;Parameter
+"'$ActiveCalibrationPage\ETKC:1'";equal;Parameter

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='ASCII'?>
+<flow xmlns="http://www.sysess.org/sympathyfordata/workflow/1.0" cls="Flow" height="50.0" id="" is_locked="False" uuid="{9fb716fc-a8fa-4762-aec9-821ebefaf032}" width="50.0" x="0.0" y="0.0">
+  <label>test_sy.syx</label>
+  <description></description>
+  <author>Unknown</author>
+  <copyright></copyright>
+  <version>1.0</version>
+  <source></source>
+  <ports/>
+  <aggregation type="json"><![CDATA[null]]></aggregation>
+  <parameters type="json"><![CDATA[{}]]></parameters>
+  <node height="50.0" id="org.sysess.sympathy.datasources.filedatasourcemultiple" uuid="{09b7f2e6-a65f-48a9-aba8-63fc4ba44255}" width="50.0" x="1350.0" y="1975.0">
+    <label>Datasources</label>
+    <description>Select data sources.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"directory": {"description": "The base directory.", "value": "output", "label": "Directory", "editor": {"type": "dirname"}, "type": "string", "order": 2}, "search_pattern": {"description": "A wildcard/regexp pattern to match files.", "value": "*", "label": "Search pattern", "editor": null, "type": "string", "order": 3}, "type": "group", "recursive": {"description": "Find files in all subfolders.", "value": false, "label": "Recursive", "editor": null, "type": "boolean", "order": 0}, "use_relative_path": {"description": "Use the relative path to the file.", "value": true, "label": "Use relative path", "editor": null, "type": "boolean", "order": 1}}]]></parameters>
+    <ports>
+      <output key="port1" requiresdata="False" scheme="text" type="[datasource]" uuid="{78d9ce72-3c03-46f2-884e-0b317f41f306}">
+        <label>DataSource</label>
+        <description>DataSource</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.importadafs" uuid="{ee0b6178-24b0-4439-985b-f49ec3a12fa4}" width="50.0" x="1625.0" y="2000.0">
+    <label>ADAFs</label>
+    <description>Import multiple adaf files</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"active_importer": {"description": "", "editor": null, "label": "", "order": 0, "type": "string", "value": "Auto"}, "custom_importer_data": {"Auto": {"label": "", "order": 0, "type": "group"}, "label": "", "order": 1, "type": "group"}, "fail_strategy": {"description": "", "editor": {"type": "combobox"}, "label": "Action on import failure", "list": ["Exception", "Create Empty Entry", "Skip File"], "order": 2, "passthrough": false, "type": "list", "value": [0], "value_names": []}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="bob" requiresdata="True" scheme="text" type="[datasource]" uuid="{0e33467a-aa0a-4995-8484-4d436390a737}">
+        <label>Datasource</label>
+        <description>Datasource</description>
+      </input>
+      <output key="" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{630fa744-62a3-4c80-9ac4-73a0037a7693}">
+        <label>ADAFOutput</label>
+        <description>ADAFOutput</description>
+      </output>
+    </ports>
+  </node>
+  <connection uuid="{7505e1f6-0ab5-4c75-897d-fc1e8825d47e}">
+    <source node="{09b7f2e6-a65f-48a9-aba8-63fc4ba44255}" port="{78d9ce72-3c03-46f2-884e-0b317f41f306}"/>
+    <destination node="{ee0b6178-24b0-4439-985b-f49ec3a12fa4}" port="{0e33467a-aa0a-4995-8484-4d436390a737}"/>
+  </connection>
+</flow>

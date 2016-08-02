@@ -1,0 +1,6 @@
+1. conda install pyside
+2. conda install pyodbc
+sympathy depends on these two packages
+
+3. copy sylib from   \SysESS\SympathyForData\1.3\Library\Common
+4. copy sympath from \SysESS\SympathyForData\1.3\Sympathy\Python

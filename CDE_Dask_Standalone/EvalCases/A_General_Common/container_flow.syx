@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='ASCII'?>
+<flow xmlns="http://www.sysess.org/sympathyfordata/workflow/1.0" cls="Flow" height="50.0" id="" is_locked="False" uuid="{d1cb7904-5dc9-4b6f-a564-ffb0738e6b1e}" width="50.0" x="0.0" y="0.0">
+  <label>container_flow.syx</label>
+  <description></description>
+  <author>Unknown</author>
+  <copyright></copyright>
+  <version>1.0</version>
+  <source></source>
+  <ports/>
+  <aggregation type="json"><![CDATA[null]]></aggregation>
+  <parameters type="json"><![CDATA[{"environment": {}}]]></parameters>
+  <flow cls="Lambda" height="50.0" id="" is_locked="False" uuid="{88ed9c14-5042-45c3-aeaa-54e767963264}" width="50.0" x="1950.0" y="1925.0">
+    <label>New Lambda 0</label>
+    <description></description>
+    <author>Unknown</author>
+    <copyright></copyright>
+    <version>1.0</version>
+    <source></source>
+    <ports>
+      <input height="50.0" index="0" key="Port" optional="False" requiresdata="False" scheme="hdf5" type="adafs" uuid="{27d11743-90f0-4754-af47-90616d3bd75c}" width="50.0" x="1900.0" y="2000.0">
+        <label>Port</label>
+        <description>Port</description>
+      </input>
+      <output height="50.0" index="0" key="Port" optional="False" requiresdata="False" scheme="hdf5" type="[datasource]" uuid="{26067721-6cf0-494c-9b90-265e56657da7}" width="50.0" x="2100.0" y="2000.0">
+        <label>Port</label>
+        <description>Port</description>
+      </output>
+    </ports>
+    <basic_ports>
+      <output key="Function" requiresdata="False" scheme="hdf5" type="adafs -&gt; [datasource]" uuid="{f321e466-51fb-4087-b689-a807c64af2da}">
+        <label>Lambda function</label>
+        <description>Lambda function</description>
+      </output>
+    </basic_ports>
+    <aggregation type="json"><![CDATA[null]]></aggregation>
+    <parameters type="json"><![CDATA[{"environment": {}}]]></parameters>
+    <flow cls="Flow" height="50.0" id="" is_locked="False" source_uuid="{97e029df-e9cc-42fd-8a93-1ca74d149d09}" uuid="{a5d9c695-ba99-4cdd-b7b6-55224072af80}" width="50.0" x="2000.0" y="2000.0" href="A_General_Common.syx">
+      <label>A_General_Common.syx</label>
+      <description></description>
+      <author></author>
+      <copyright></copyright>
+      <version></version>
+      <source>A_General_Common.syx</source>
+      <ports>
+        <input height="50.0" index="0" key="Port" optional="False" requiresdata="False" scheme="hdf5" source_uuid="{73183edc-d239-4f0a-b75c-7adec4da7101}" type="adafs" uuid="{851ef73d-3603-4b27-bc02-2327e9c1b125}" width="50.0" x="1150.0" y="1925.0">
+          <label>Port</label>
+          <description>Port</description>
+        </input>
+        <output height="50.0" index="0" key="Port" optional="False" requiresdata="False" scheme="hdf5" source_uuid="{a8444dfd-a27b-418b-a0ae-7ed50211d6e7}" type="[datasource]" uuid="{9ae6e09d-6d7f-4a06-a8f3-d80cd1566f11}" width="50.0" x="3625.0" y="2000.0">
+          <label>Port</label>
+          <description>Port</description>
+        </output>
+      </ports>
+    </flow>
+    <connection uuid="{00f03d69-0ac0-4e47-a1cc-e2c837e47ff9}">
+      <source node="{a5d9c695-ba99-4cdd-b7b6-55224072af80}" port="{9ae6e09d-6d7f-4a06-a8f3-d80cd1566f11}"/>
+      <destination node="{88ed9c14-5042-45c3-aeaa-54e767963264}" port="{26067721-6cf0-494c-9b90-265e56657da7}"/>
+    </connection>
+    <connection uuid="{219adcdd-8a59-4581-9cc9-cf1baa657a74}">
+      <source node="{88ed9c14-5042-45c3-aeaa-54e767963264}" port="{27d11743-90f0-4754-af47-90616d3bd75c}"/>
+      <destination node="{a5d9c695-ba99-4cdd-b7b6-55224072af80}" port="{851ef73d-3603-4b27-bc02-2327e9c1b125}"/>
+    </connection>
+  </flow>
+</flow>
