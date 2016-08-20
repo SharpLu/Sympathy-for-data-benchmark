@@ -1,0 +1,7 @@
+Floats_mixed_with_integers;Integers;Empty_Column;Floats_mixed_with_empty_slots;Integers_mixed_with_text;Booleans;Float;DateTime;Symbols;Integers_mixed_with_empty_slots;Floats_mixed_with_text;
+0.0;1;;0.1;0;1;0.1;2013-12-31;°C;0;0.1;
+0.5;2;;0.2;1;0;0.2;13-12-31;@;1;0.2;
+1.0;3;;;Text;1;0.3;12/31/2013;Â;;Text;
+1.5;4;;0.4;3;0;0.4;12/31/13;£;3;0.4;
+2.0;5;;0.5;4;1;0.5;12/31/13 02:00 PM;μ;4;0.5;
+2.5;6;;0.6;5;1;0.6;12/31/2013 14:00:00;±;5;0.6;

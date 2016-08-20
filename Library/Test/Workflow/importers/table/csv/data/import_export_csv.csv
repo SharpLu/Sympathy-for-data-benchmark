@@ -1,0 +1,7 @@
+Float	Integers	Floats_mixed_with_integers	Integers_mixed_with_text	Integers_mixed_with_empty_slots	Floats_mixed_with_text	Floats_mixed_with_empty_slots	Booleans	DateTime	Symbols	Empty_Column
+0.1	1	0	0	0	0.1	0.1	1	2013-12-31	°C	
+0.2	2	0.5	1	1	0.2	0.2	0	13-12-31	@	
+0.3	3	1	Text		Text		1	12/31/2013	Â	
+0.4	4	1.5	3	3	0.4	0.4	0	12/31/13	£	
+0.5	5	2	4	4	0.5	0.5	1	12/31/13 02:00 PM	μ	
+0.6	6	2.5	5	5	0.6	0.6	1	12/31/2013 14:00:00	±	

@@ -1,0 +1,11 @@
+Float;0.1
+Integers;1
+Floats_mixed_with_integers;0
+Integers_mixed_with_text;0
+Integers_mixed_with_empty_slots;0
+Floats_mixed_with_text;0.1
+Floats_mixed_with_empty_slots;0.1
+Booleans;1
+DateTime;2013-12-31
+Symbols;°C
+Empty_Column;

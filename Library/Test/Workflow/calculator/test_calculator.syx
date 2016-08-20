@@ -1,0 +1,373 @@
+<?xml version='1.0' encoding='ASCII'?>
+<flow xmlns="http://www.sysess.org/sympathyfordata/workflow/1.0" cls="Flow" height="50.0" id="" is_locked="False" uuid="{29476769-0a4a-4f7c-8a0c-bd344bb452e5}" width="50.0" x="0.0" y="0.0">
+  <label>test_calculator</label>
+  <description></description>
+  <author>Unknown</author>
+  <copyright></copyright>
+  <version>1.0</version>
+  <source></source>
+  <aggregation type="json"><![CDATA[null]]></aggregation>
+  <libraries type="json"><![CDATA[[]]]></libraries>
+  <pythonpaths type="json"><![CDATA[[]]]></pythonpaths>
+  <environment type="json"><![CDATA[{}]]></environment>
+  <parameters type="json"><![CDATA[{"environment": {}}]]></parameters>
+  <ports/>
+  <node height="50.0" id="org.sysess.sympathy.generate.signaltables" uuid="{1aa76265-2501-457b-a5f6-158f9316b4b6}" width="50.0" x="2150.0" y="2125.0">
+    <label>Generate Signal Tables</label>
+    <description></description>
+    <author>Benedikt Ziegler &lt;benedikt.ziegler@combine.se&gt;</author>
+    <copyright>(c) 2016 Combine AB</copyright>
+    <version>0.1</version>
+    <parameters type="json"><![CDATA[{"type": "group", "table_params": {"label": "Table", "order": 0, "type": "page", "column_entries": {"description": "The number of column entries to be generated.", "label": "Column entries", "order": 0, "type": "integer", "value": 2, "editor": {"max": 1000000, "min": 0, "step": 1, "type": "spinbox"}}, "column_length": {"description": "The length of columns to be generated.", "label": "Column length", "order": 1, "type": "integer", "value": 5, "editor": {"max": 100000000, "min": 0, "step": 1, "type": "spinbox"}}, "length": {"description": "The length of table list to be generated.", "label": "Table list length", "order": 2, "type": "integer", "value": 2, "editor": {"max": 10000, "min": 0, "step": 1, "type": "spinbox"}}}, "signal_params": {"label": "Signal", "order": 1, "type": "page", "signal_type": {"description": "The signal to be generated.", "label": "Signal type", "order": 0, "passthrough": false, "type": "list", "list": ["sinus", "tangent", "cosines"], "value": [0], "value_names": [], "editor": {"type": "combobox"}}, "amplitude": {"description": "The amplitude of the signal to be generated.", "editor": null, "label": "Amplitude", "order": 1, "type": "float", "value": 1.0}, "frequency": {"description": "The frequency of the signal to be generated.", "editor": null, "label": "Frequency", "order": 2, "type": "float", "value": 0.01}, "period": {"description": "The period of the signal to be generated.", "editor": null, "label": "Period", "order": 3, "type": "float", "value": 100.0}, "use_period": {"description": "Use Period [Checked] or Frequency [Unchecked] to generate the signal.", "editor": null, "label": "Period or Frequency", "order": 4, "type": "boolean", "value": true}, "phase_offset": {"description": "The phase offset of the signal to be generated.", "editor": null, "label": "Phase offset", "order": 5, "type": "float", "value": 0.0}, "add_noise": {"description": "If random noise should be added to the signals.", "editor": null, "label": "Add random noise", "order": 6, "type": "boolean", "value": false}, "noise_amplitude": {"description": "The amplitude of the noise.", "label": "Amplitude of noise", "order": 7, "type": "float", "value": 0.01, "editor": {"decimals": 2, "step": 0.05, "type": "spinbox"}}, "index_column": {"description": "Add an index column to the beginning of the table.", "editor": null, "label": "First column as index", "order": 8, "type": "boolean", "value": true}}}]]></parameters>
+    <ports>
+      <output key="port0" requiresdata="False" scheme="hdf5" type="[table]" uuid="{5bd622eb-2d30-449f-b561-98f743eaf2e5}">
+        <label>Signal Tables</label>
+        <description>Signal Tables</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.table.hsplittablenode" uuid="{267ed2fd-b7cf-43ed-aada-d7979a69d717}" width="50.0" x="2550.0" y="2150.0">
+    <label>HSplit Table</label>
+    <description>Split a Table into multiple Tables by columns, every column becomes a new table.</description>
+    <author>Greger Cronquist &lt;greger.cronquist@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group"}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="table" uuid="{a3a766b8-57f7-467b-b2b6-fe5d066cf247}">
+        <label>Input Table</label>
+        <description>Input Table</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[table]" uuid="{78766055-4358-4e2a-8dd4-4e0c66263039}">
+        <label>Joined Tables</label>
+        <description>Joined Tables</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.list.getitemlist" uuid="{2be57d62-7645-4ba8-9b43-4e7b8777de1b}" width="50.0" x="2400.0" y="2050.0">
+    <label>Get Item List</label>
+    <description></description>
+    <author>Erik der Hagopian &lt;erik.hagopian@sysess.org&gt;</author>
+    <copyright>(C) 2015 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "index": {"description": "Choose item index in list.", "label": "Index", "order": 0, "passthrough": false, "type": "list", "list": ["0", "1"], "value": [0], "value_names": [], "editor": {"type": "combobox"}}}]]></parameters>
+    <ports>
+      <input key="list" requiresdata="False" scheme="hdf5" type="[table]" uuid="{856660f9-8f2a-4957-a410-b69fa662860c}">
+        <label>Input List</label>
+        <description>Input List</description>
+      </input>
+      <output key="item" requiresdata="False" scheme="hdf5" type="table" uuid="{b1fbd859-5288-455b-8163-95637454e425}">
+        <label>Output selcted Item from List</label>
+        <description>Output selcted Item from List</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.table.calculator" uuid="{3bd1b700-ae36-492c-8cf8-d487035856e0}" width="50.0" x="2275.0" y="2050.0">
+    <label>Calculator Tables</label>
+    <description>Performs user-defined python calculations</description>
+    <author>Greger Cronquist &lt;greger.cronquist@sysess.org&gt;, Magnus Sand&#233;n &lt;magnus.sanden@combine.se&gt;, Sara Gustafzelius &lt;sara.gustafzelius@combine.se&gt;, Benedikt Ziegler &lt;benedikt.ziegler@combine.se&gt;</author>
+    <copyright>(c) 2012 Combine AB</copyright>
+    <version>3.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "calc_list": {"description": "List of calculations.", "editor": null, "label": "List of calculations", "order": 0, "passthrough": false, "type": "list", "list": ["${first} = ${second} + 1", "${second} = ${index} + 1", "${third} = ${first}"], "value": [0], "value_names": []}, "same_length_res": {"description": "Gather all the results generated from an incoming Table into a common output table. This requires that the results all have the same length. An error will be given if the lengths of the outgoing results differ.", "editor": null, "label": "Put results in common outputs.", "order": 1, "type": "boolean", "value": true}}]]></parameters>
+    <ports>
+      <input key="port0" requiresdata="False" scheme="hdf5" type="[table]" uuid="{be49b056-6fe9-4f5d-9c31-abc63a4b9426}">
+        <label>Input Table</label>
+        <description>Input Table</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[table]" uuid="{fdb46c51-8204-4790-a782-f8f86dda3169}">
+        <label>The input Table with added plot attributes</label>
+        <description>The input Table with added plot attributes</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.create.createtable" uuid="{42c0989b-54a0-435b-881d-c3421900bb17}" width="50.0" x="2150.0" y="1850.0">
+    <label>Atributes Table</label>
+    <description></description>
+    <author>Magnus Sand&#233;n &lt;magnus.sanden@combine.se&gt;</author>
+    <copyright>(c) 2016 Combine AB</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "json_table": {"description": "", "editor": null, "label": "", "order": 0, "type": "string", "value": "[[\"column name\", \"U\", [\"first\", \"second\", \"third\"]], [\"attribute name\", \"U\", [\"calculation\", \"calculation\", \"calculation\"]], [\"attribute value\", \"U\", [\"${first} = ${second} + 1\", \"${second} = ${index} + 1\", \"${third} = ${first}\"]]]"}}]]></parameters>
+    <ports>
+      <output key="port0" requiresdata="False" scheme="hdf5" type="table" uuid="{2fc186f0-9183-4efb-9799-dffbe4704e74}">
+        <label>Manually created table</label>
+        <description>Manually created table</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.table.assertequaltable" uuid="{4acd86b3-b7d0-436d-869c-aeb607566889}" width="50.0" x="2925.0" y="2200.0">
+    <label>Assert Equal Table</label>
+    <description></description>
+    <author>Magnus Sand&#233;n &lt;magnus.sanden@combine.se&gt;</author>
+    <copyright>Copyright (c) 2016 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "col_order": {"description": "", "editor": null, "label": "Compare column order", "order": 0, "type": "boolean", "value": true}, "col_attrs": {"description": "", "editor": null, "label": "Compare column attributes", "order": 1, "type": "boolean", "value": true}, "tbl_names": {"description": "", "editor": null, "label": "Compare table names", "order": 2, "type": "boolean", "value": true}, "tbl_attrs": {"description": "", "editor": null, "label": "Compare table attributes", "order": 3, "type": "boolean", "value": true}}]]></parameters>
+    <ports>
+      <input key="table1" requiresdata="False" scheme="hdf5" type="table" uuid="{b2ecb1d9-06d6-43bc-9eff-08d000234ccf}">
+        <label>Table A</label>
+        <description>Table A</description>
+      </input>
+      <input key="table2" requiresdata="False" scheme="hdf5" type="table" uuid="{8c2e88b4-caac-42f7-9e38-257954302de9}">
+        <label>Table B</label>
+        <description>Table B</description>
+      </input>
+      <output key="out" requiresdata="False" scheme="hdf5" type="table" uuid="{fc81d74b-5031-488c-b9fd-93b94d7cd240}">
+        <label>Output Table</label>
+        <description>Output Table</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.table.calculatortable" uuid="{5ee88a86-7da5-45e0-a343-524b856cc1d7}" width="50.0" x="2325.0" y="1750.0">
+    <label>Calculator Table</label>
+    <description>Performs user-defined python calculations</description>
+    <author>Greger Cronquist &lt;greger.cronquist@sysess.org&gt;, Magnus Sand&#233;n &lt;magnus.sanden@combine.se&gt;, Sara Gustafzelius &lt;sara.gustafzelius@combine.se&gt;, Benedikt Ziegler &lt;benedikt.ziegler@combine.se&gt;</author>
+    <copyright>(c) 2012 Combine AB</copyright>
+    <version>3.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "calc_list": {"description": "List of calculations.", "editor": null, "label": "List of calculations", "order": 0, "passthrough": false, "type": "list", "list": ["${first} = ${second} + 1", "${second} = ${index} + 1", "${third} = ${first}"], "value": [0], "value_names": []}, "same_length_res": {"description": "Gather all the results generated from an incoming Table into a common output table. This requires that the results all have the same length. An error will be given if the lengths of the outgoing results differ.", "editor": null, "label": "Put results in common outputs.", "order": 1, "type": "boolean", "value": true}}]]></parameters>
+    <ports>
+      <input key="port0" requiresdata="False" scheme="hdf5" type="table" uuid="{d0f490d1-3fb1-4bdf-94b6-0d624277c3bb}">
+        <label>Input Table</label>
+        <description>Input Table</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="table" uuid="{74e72c1a-8af2-4c74-b5bb-195ffcb61846}">
+        <label>The input Table with added plot attributes</label>
+        <description>The input Table with added plot attributes</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.list.getitemlist" uuid="{75ee8272-798c-47b2-a4cd-a2d2bbfcd5ee}" width="50.0" x="2675.0" y="2150.0">
+    <label>Get Item List</label>
+    <description></description>
+    <author>Erik der Hagopian &lt;erik.hagopian@sysess.org&gt;</author>
+    <copyright>(C) 2015 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "index": {"description": "Choose item index in list.", "label": "Index", "order": 0, "passthrough": false, "type": "list", "list": ["0", "1"], "value": [0], "value_names": [], "editor": {"type": "combobox"}}}]]></parameters>
+    <ports>
+      <input key="list" requiresdata="False" scheme="hdf5" type="[table]" uuid="{97486e36-87be-4da1-bfb5-c8592851a541}">
+        <label>Input List</label>
+        <description>Input List</description>
+      </input>
+      <output key="item" requiresdata="False" scheme="hdf5" type="table" uuid="{67359f57-dde5-4e00-9554-e7c07c92a0e7}">
+        <label>Output selcted Item from List</label>
+        <description>Output selcted Item from List</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.table.settablename" uuid="{7baef7b0-1c35-4105-8928-4c10cc6a62f3}" width="50.0" x="2800.0" y="2150.0">
+    <label>Set Table Name</label>
+    <description>Set the name of a Table</description>
+    <author>Greger Cronquist &lt;greger.cronquist@sysess.org&gt;</author>
+    <copyright>(c) 2013 Sysem Engineering Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "name": {"description": "Name to assign to the table(s).", "editor": null, "label": "Name", "order": 0, "type": "string", "value": ""}}]]></parameters>
+    <ports>
+      <input key="" requiresdata="False" scheme="hdf5" type="table" uuid="{88571735-aaf6-4e98-9c13-f77c9f732764}">
+        <label>Input Table</label>
+        <description>Input Table</description>
+      </input>
+      <output key="" requiresdata="False" scheme="hdf5" type="table" uuid="{98b7a709-42ef-4ea4-bcda-b620bdb7f1f1}">
+        <label>Table with name</label>
+        <description>Table with name</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.table.assertequaltable" uuid="{7e0aef0b-a1cd-4ed7-a0b1-ecff83f31338}" width="50.0" x="2925.0" y="1750.0">
+    <label>Assert Equal Table</label>
+    <description></description>
+    <author>Magnus Sand&#233;n &lt;magnus.sanden@combine.se&gt;</author>
+    <copyright>Copyright (c) 2016 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "col_order": {"description": "", "editor": null, "label": "Compare column order", "order": 0, "type": "boolean", "value": true}, "col_attrs": {"description": "", "editor": null, "label": "Compare column attributes", "order": 1, "type": "boolean", "value": true}, "tbl_names": {"description": "", "editor": null, "label": "Compare table names", "order": 2, "type": "boolean", "value": true}, "tbl_attrs": {"description": "", "editor": null, "label": "Compare table attributes", "order": 3, "type": "boolean", "value": true}}]]></parameters>
+    <ports>
+      <input key="table1" requiresdata="False" scheme="hdf5" type="table" uuid="{6f2bec65-f104-46d7-94b0-654756d0d521}">
+        <label>Table A</label>
+        <description>Table A</description>
+      </input>
+      <input key="table2" requiresdata="False" scheme="hdf5" type="table" uuid="{3a380d33-0a7b-4d05-b70b-94f14488a150}">
+        <label>Table B</label>
+        <description>Table B</description>
+      </input>
+      <output key="out" requiresdata="False" scheme="hdf5" type="table" uuid="{71c6c2a2-7945-4ab0-8d47-e8d5b2b9e2a8}">
+        <label>Output Table</label>
+        <description>Output Table</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy_course.setcolumnattributestable" uuid="{83fd6910-2428-4de7-8252-6062192a391d}" width="50.0" x="2325.0" y="1875.0">
+    <label>Set column attributes in Table</label>
+    <description>Set column attributes in Table.</description>
+    <author>Daniel Hedendahl &lt;daniel.hedendahl@combine.se&gt;</author>
+    <copyright>(C) 2016 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "columns": {"description": "Select column with column names", "label": "Column names", "order": 0, "passthrough": false, "type": "list", "list": ["attribute name", "attribute value", "column name"], "value": [2], "value_names": ["column name"], "editor": {"type": "combobox"}}, "attributes": {"description": "Select column with attributes", "label": "Attribute names", "order": 1, "passthrough": false, "type": "list", "list": ["attribute name", "attribute value", "column name"], "value": [0], "value_names": ["attribute name"], "editor": {"type": "combobox"}}, "values": {"description": "Select column with values", "label": "Attribute values", "order": 2, "passthrough": false, "type": "list", "list": ["attribute name", "attribute value", "column name"], "value": [1], "value_names": ["attribute value"], "editor": {"type": "combobox"}}}]]></parameters>
+    <ports>
+      <input key="attributes" requiresdata="False" scheme="hdf5" type="table" uuid="{6395fa5c-c823-4684-bc5e-7267c1a8f015}">
+        <label>Table with, at least, three column, one for column names, another for attribute names and a third for attribute values</label>
+        <description>Table with, at least, three column, one for column names, another for attribute names and a third for attribute values</description>
+      </input>
+      <input key="in_data" requiresdata="False" scheme="hdf5" type="table" uuid="{311bcc1d-5090-49eb-9ab0-18e933083f08}">
+        <label>Table with data columns</label>
+        <description>Table with data columns</description>
+      </input>
+      <output key="out_data" requiresdata="False" scheme="hdf5" type="table" uuid="{8cf5622f-6479-4bac-8093-12be55c4d99f}">
+        <label>Table with updated columns attributes</label>
+        <description>Table with updated columns attributes</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.list.getitemlist" uuid="{8d9cf54a-08b6-4683-97f1-b4cea0497716}" width="50.0" x="2400.0" y="2200.0">
+    <label>Get Item List</label>
+    <description></description>
+    <author>Erik der Hagopian &lt;erik.hagopian@sysess.org&gt;</author>
+    <copyright>(C) 2015 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "index": {"description": "Choose item index in list.", "label": "Index", "order": 0, "passthrough": false, "type": "list", "list": ["0", "1"], "value": [0], "value_names": [], "editor": {"type": "combobox"}}}]]></parameters>
+    <ports>
+      <input key="list" requiresdata="False" scheme="hdf5" type="[table]" uuid="{f4e95883-6140-4121-a948-de0595caa5f5}">
+        <label>Input List</label>
+        <description>Input List</description>
+      </input>
+      <output key="item" requiresdata="False" scheme="hdf5" type="table" uuid="{601c4544-5884-4897-83f1-b03097103e97}">
+        <label>Output selcted Item from List</label>
+        <description>Output selcted Item from List</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.table.calculator" uuid="{a4af13da-fb39-455a-bdab-d4c832ffe461}" width="50.0" x="2275.0" y="2200.0">
+    <label>Calculator Tables</label>
+    <description>Performs user-defined python calculations</description>
+    <author>Greger Cronquist &lt;greger.cronquist@sysess.org&gt;, Magnus Sand&#233;n &lt;magnus.sanden@combine.se&gt;, Sara Gustafzelius &lt;sara.gustafzelius@combine.se&gt;, Benedikt Ziegler &lt;benedikt.ziegler@combine.se&gt;</author>
+    <copyright>(c) 2012 Combine AB</copyright>
+    <version>3.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "calc_list": {"description": "List of calculations.", "editor": null, "label": "List of calculations", "order": 0, "passthrough": false, "type": "list", "list": ["${first} = ${second} + 1", "${second} = ${index} + 1", "${third} = ${first}"], "value": [0], "value_names": []}, "same_length_res": {"description": "Gather all the results generated from an incoming Table into a common output table. This requires that the results all have the same length. An error will be given if the lengths of the outgoing results differ.", "editor": null, "label": "Put results in common outputs.", "order": 1, "type": "boolean", "value": false}}]]></parameters>
+    <ports>
+      <input key="port0" requiresdata="False" scheme="hdf5" type="[table]" uuid="{9b224fa3-14ae-4c64-a17a-2c172a466892}">
+        <label>Input Table</label>
+        <description>Input Table</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[table]" uuid="{74e9f5d4-8b75-4ed5-8676-dcf03cb42ff7}">
+        <label>The input Table with added plot attributes</label>
+        <description>The input Table with added plot attributes</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.create.createtable" uuid="{d4674c39-41d5-4b09-8b6d-14207aad694c}" width="50.0" x="2150.0" y="1925.0">
+    <label>Data Table</label>
+    <description></description>
+    <author>Magnus Sand&#233;n &lt;magnus.sanden@combine.se&gt;</author>
+    <copyright>(c) 2016 Combine AB</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "json_table": {"description": "", "editor": null, "label": "", "order": 0, "type": "string", "value": "[[\"first\", \"i\", [2, 3, 4, 5, 6]], [\"second\", \"i\", [1, 2, 3, 4, 5]], [\"third\", \"i\", [2, 3, 4, 5, 6]]]"}}]]></parameters>
+    <ports>
+      <output key="port0" requiresdata="False" scheme="hdf5" type="table" uuid="{fda9dca9-bcff-49ec-9850-550cc208a6de}">
+        <label>Manually created table</label>
+        <description>Manually created table</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.table.assertequaltable" uuid="{d6e5205e-46bd-4141-ab68-3a2257a8e37b}" width="50.0" x="2925.0" y="2050.0">
+    <label>Assert Equal Table</label>
+    <description></description>
+    <author>Magnus Sand&#233;n &lt;magnus.sanden@combine.se&gt;</author>
+    <copyright>Copyright (c) 2016 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "col_order": {"description": "", "editor": null, "label": "Compare column order", "order": 0, "type": "boolean", "value": true}, "col_attrs": {"description": "", "editor": null, "label": "Compare column attributes", "order": 1, "type": "boolean", "value": true}, "tbl_names": {"description": "", "editor": null, "label": "Compare table names", "order": 2, "type": "boolean", "value": true}, "tbl_attrs": {"description": "", "editor": null, "label": "Compare table attributes", "order": 3, "type": "boolean", "value": true}}]]></parameters>
+    <ports>
+      <input key="table1" requiresdata="False" scheme="hdf5" type="table" uuid="{265f336d-44f5-4b2e-84be-6a81d13b5217}">
+        <label>Table A</label>
+        <description>Table A</description>
+      </input>
+      <input key="table2" requiresdata="False" scheme="hdf5" type="table" uuid="{d8331ff3-b4aa-441b-9a5a-ae329e9334d2}">
+        <label>Table B</label>
+        <description>Table B</description>
+      </input>
+      <output key="out" requiresdata="False" scheme="hdf5" type="table" uuid="{b24c1b62-d889-457c-b1e4-b000a41d59e3}">
+        <label>Output Table</label>
+        <description>Output Table</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.generate.signaltable" uuid="{dee96dc0-2ee6-4b44-beb9-034ecc141488}" width="50.0" x="2150.0" y="1750.0">
+    <label>Generate Signal Table</label>
+    <description></description>
+    <author>Benedikt Ziegler &lt;benedikt.ziegler@combine.se&gt;</author>
+    <copyright>(c) 2016 Combine AB</copyright>
+    <version>0.1</version>
+    <parameters type="json"><![CDATA[{"type": "group", "table_params": {"label": "Table", "order": 0, "type": "page", "column_entries": {"description": "The number of column entries to be generated.", "label": "Column entries", "order": 0, "type": "integer", "value": 2, "editor": {"max": 1000000, "min": 0, "step": 1, "type": "spinbox"}}, "column_length": {"description": "The length of columns to be generated.", "label": "Column length", "order": 1, "type": "integer", "value": 5, "editor": {"max": 100000000, "min": 0, "step": 1, "type": "spinbox"}}}, "signal_params": {"label": "Signal", "order": 1, "type": "page", "signal_type": {"description": "The signal to be generated.", "label": "Signal type", "order": 0, "passthrough": false, "type": "list", "list": ["sinus", "tangent", "cosines"], "value": [0], "value_names": [], "editor": {"type": "combobox"}}, "amplitude": {"description": "The amplitude of the signal to be generated.", "editor": null, "label": "Amplitude", "order": 1, "type": "float", "value": 1.0}, "frequency": {"description": "The frequency of the signal to be generated.", "editor": null, "label": "Frequency", "order": 2, "type": "float", "value": 0.01}, "period": {"description": "The period of the signal to be generated.", "editor": null, "label": "Period", "order": 3, "type": "float", "value": 100.0}, "use_period": {"description": "Use Period [Checked] or Frequency [Unchecked] to generate the signal.", "editor": null, "label": "Period or Frequency", "order": 4, "type": "boolean", "value": true}, "phase_offset": {"description": "The phase offset of the signal to be generated.", "editor": null, "label": "Phase offset", "order": 5, "type": "float", "value": 0.0}, "add_noise": {"description": "If random noise should be added to the signals.", "editor": null, "label": "Add random noise", "order": 6, "type": "boolean", "value": false}, "noise_amplitude": {"description": "The amplitude of the noise.", "label": "Amplitude of noise", "order": 7, "type": "float", "value": 0.01, "editor": {"decimals": 2, "step": 0.05, "type": "spinbox"}}, "index_column": {"description": "Add an index column to the beginning of the table.", "editor": null, "label": "First column as index", "order": 8, "type": "boolean", "value": true}}}]]></parameters>
+    <ports>
+      <output key="port0" requiresdata="False" scheme="hdf5" type="table" uuid="{b51fc7eb-287f-4896-a989-7266ccbeb2cc}">
+        <label>Signal Table</label>
+        <description>Signal Table</description>
+      </output>
+    </ports>
+  </node>
+  <connection type="[table]" uuid="{28ab9d00-b419-457a-a509-99847625c700}">
+    <source node="{267ed2fd-b7cf-43ed-aada-d7979a69d717}" port="{78766055-4358-4e2a-8dd4-4e0c66263039}"/>
+    <destination node="{75ee8272-798c-47b2-a4cd-a2d2bbfcd5ee}" port="{97486e36-87be-4da1-bfb5-c8592851a541}"/>
+  </connection>
+  <connection type="[table]" uuid="{40e2d0d2-cafc-472c-96c6-482915241684}">
+    <source node="{1aa76265-2501-457b-a5f6-158f9316b4b6}" port="{5bd622eb-2d30-449f-b561-98f743eaf2e5}"/>
+    <destination node="{3bd1b700-ae36-492c-8cf8-d487035856e0}" port="{be49b056-6fe9-4f5d-9c31-abc63a4b9426}"/>
+  </connection>
+  <connection type="table" uuid="{4ad6e7e4-7b56-475a-96be-563b18748a15}">
+    <source node="{75ee8272-798c-47b2-a4cd-a2d2bbfcd5ee}" port="{67359f57-dde5-4e00-9554-e7c07c92a0e7}"/>
+    <destination node="{7baef7b0-1c35-4105-8928-4c10cc6a62f3}" port="{88571735-aaf6-4e98-9c13-f77c9f732764}"/>
+  </connection>
+  <connection type="[table]" uuid="{6a8f3e4d-59d4-459e-ad6e-b65071b09e60}">
+    <source node="{1aa76265-2501-457b-a5f6-158f9316b4b6}" port="{5bd622eb-2d30-449f-b561-98f743eaf2e5}"/>
+    <destination node="{a4af13da-fb39-455a-bdab-d4c832ffe461}" port="{9b224fa3-14ae-4c64-a17a-2c172a466892}"/>
+  </connection>
+  <connection type="table" uuid="{71edf1ce-bdd5-4d4f-85d7-aa8c0ec06412}">
+    <source node="{83fd6910-2428-4de7-8252-6062192a391d}" port="{8cf5622f-6479-4bac-8093-12be55c4d99f}"/>
+    <destination node="{267ed2fd-b7cf-43ed-aada-d7979a69d717}" port="{a3a766b8-57f7-467b-b2b6-fe5d066cf247}"/>
+  </connection>
+  <connection type="table" uuid="{79e8bf11-01f5-4e86-94b3-0f9ad5bea215}">
+    <source node="{83fd6910-2428-4de7-8252-6062192a391d}" port="{8cf5622f-6479-4bac-8093-12be55c4d99f}"/>
+    <destination node="{7e0aef0b-a1cd-4ed7-a0b1-ecff83f31338}" port="{3a380d33-0a7b-4d05-b70b-94f14488a150}"/>
+  </connection>
+  <connection type="table" uuid="{7e2af0cd-aa8d-4b9b-9402-c1007f19734e}">
+    <source node="{8d9cf54a-08b6-4683-97f1-b4cea0497716}" port="{601c4544-5884-4897-83f1-b03097103e97}"/>
+    <destination node="{4acd86b3-b7d0-436d-869c-aeb607566889}" port="{8c2e88b4-caac-42f7-9e38-257954302de9}"/>
+  </connection>
+  <connection type="[table]" uuid="{85448c29-af7f-4d64-b03f-38adc29348ba}">
+    <source node="{3bd1b700-ae36-492c-8cf8-d487035856e0}" port="{fdb46c51-8204-4790-a782-f8f86dda3169}"/>
+    <destination node="{2be57d62-7645-4ba8-9b43-4e7b8777de1b}" port="{856660f9-8f2a-4957-a410-b69fa662860c}"/>
+  </connection>
+  <connection type="table" uuid="{9a047cd4-3cd5-4906-9e66-2c4c49547607}">
+    <source node="{5ee88a86-7da5-45e0-a343-524b856cc1d7}" port="{74e72c1a-8af2-4c74-b5bb-195ffcb61846}"/>
+    <destination node="{7e0aef0b-a1cd-4ed7-a0b1-ecff83f31338}" port="{6f2bec65-f104-46d7-94b0-654756d0d521}"/>
+  </connection>
+  <connection type="table" uuid="{a1456dbb-3dc9-4903-a523-4984d5cdad6d}">
+    <source node="{7baef7b0-1c35-4105-8928-4c10cc6a62f3}" port="{98b7a709-42ef-4ea4-bcda-b620bdb7f1f1}"/>
+    <destination node="{4acd86b3-b7d0-436d-869c-aeb607566889}" port="{b2ecb1d9-06d6-43bc-9eff-08d000234ccf}"/>
+  </connection>
+  <connection type="table" uuid="{bd4bc29c-b070-4401-acda-06f7d861bbde}">
+    <source node="{d4674c39-41d5-4b09-8b6d-14207aad694c}" port="{fda9dca9-bcff-49ec-9850-550cc208a6de}"/>
+    <destination node="{83fd6910-2428-4de7-8252-6062192a391d}" port="{311bcc1d-5090-49eb-9ab0-18e933083f08}"/>
+  </connection>
+  <connection type="table" uuid="{c9a18b5a-5665-45a9-a4e5-61146a074135}">
+    <source node="{2be57d62-7645-4ba8-9b43-4e7b8777de1b}" port="{b1fbd859-5288-455b-8163-95637454e425}"/>
+    <destination node="{d6e5205e-46bd-4141-ab68-3a2257a8e37b}" port="{d8331ff3-b4aa-441b-9a5a-ae329e9334d2}"/>
+  </connection>
+  <connection type="table" uuid="{cbb251c5-282b-4bcb-8ed3-6c22e1fd114e}">
+    <source node="{42c0989b-54a0-435b-881d-c3421900bb17}" port="{2fc186f0-9183-4efb-9799-dffbe4704e74}"/>
+    <destination node="{83fd6910-2428-4de7-8252-6062192a391d}" port="{6395fa5c-c823-4684-bc5e-7267c1a8f015}"/>
+  </connection>
+  <connection type="[table]" uuid="{cf91b747-4b2d-4ebb-90c3-0324e019e8d6}">
+    <source node="{a4af13da-fb39-455a-bdab-d4c832ffe461}" port="{74e9f5d4-8b75-4ed5-8676-dcf03cb42ff7}"/>
+    <destination node="{8d9cf54a-08b6-4683-97f1-b4cea0497716}" port="{f4e95883-6140-4121-a948-de0595caa5f5}"/>
+  </connection>
+  <connection type="table" uuid="{edf04c4b-42ba-412a-8ce1-60302599b58f}">
+    <source node="{dee96dc0-2ee6-4b44-beb9-034ecc141488}" port="{b51fc7eb-287f-4896-a989-7266ccbeb2cc}"/>
+    <destination node="{5ee88a86-7da5-45e0-a343-524b856cc1d7}" port="{d0f490d1-3fb1-4bdf-94b6-0d624277c3bb}"/>
+  </connection>
+  <connection type="table" uuid="{f616dd14-9943-4947-8861-de722b364681}">
+    <source node="{83fd6910-2428-4de7-8252-6062192a391d}" port="{8cf5622f-6479-4bac-8093-12be55c4d99f}"/>
+    <destination node="{d6e5205e-46bd-4141-ab68-3a2257a8e37b}" port="{265f336d-44f5-4b2e-84be-6a81d13b5217}"/>
+  </connection>
+  <text height="50.0" uuid="{5132a6a9-4865-47b3-a862-20745993e622}" width="150.0" x="1975.0" y="1900.0">Create test data</text>
+  <text height="50.0" uuid="{7b252148-2131-4c09-9227-035081056167}" width="150.0" x="1975.0" y="1750.0">Test Table version</text>
+  <text height="75.0" uuid="{c76cf455-5a8a-4ef5-a949-4cca91a01d87}" width="150.0" x="1975.0" y="2200.0">Test Tables version
+  - Separated output</text>
+  <text height="75.0" uuid="{fa695732-77f7-4f72-b402-b08b5b134503}" width="150.0" x="1975.0" y="2050.0">Test Tables version
+  - Common output</text>
+</flow>
