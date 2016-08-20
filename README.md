@@ -5,6 +5,7 @@
 Sympathy for data benchmark
 
 
+
 2016-05-25
 
 
@@ -83,4 +84,6 @@ https://www.youtube.com/watch?v=u-P4keLaBzc
 4.  If you experience can not find python packages , please import the package to your spark interpreter
 C:\Anaconda2\Lib\site-packages
 
+New introduction of Sympathy for data
+http://sympathy-for-data.readthedocs.io/en/1.3/src/about_sympathy.html
 
