@@ -1,0 +1,1058 @@
+<?xml version='1.0' encoding='ASCII'?>
+<flow xmlns="http://www.sysess.org/sympathyfordata/workflow/1.0" cls="Flow" height="50.0" id="" is_locked="False" uuid="{75b7c14d-0287-47e9-b60f-cc0a92b99ba0}" width="50.0" x="0.0" y="0.0">
+  <label>adaf.syx</label>
+  <description></description>
+  <author>Unknown</author>
+  <copyright></copyright>
+  <version>1.0</version>
+  <source></source>
+  <ports/>
+  <aggregation type="json"><![CDATA[{}]]></aggregation>
+  <parameters type="json"><![CDATA[{"environment": {}}]]></parameters>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.vjoinadafs" uuid="{02daed3e-212e-4ee5-a50d-8e6db5c7ff23}" width="50.0" x="1450.0" y="2075.0">
+    <label>VJoin ADAFs</label>
+    <description>VJoin multiple ADAF files.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C)2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"use_reference_time": {"description": "Use raster reference time.", "value": false, "label": "Use raster reference time", "editor": null, "type": "boolean", "order": 0}, "minimum_increment": {"description": "Increment used for tables with number of rows = 0", "value": 1, "label": "Increment used when number of rows = 0", "editor": null, "type": "integer", "order": 1}, "output_index": {"description": "Choose name for output index column. Can be left empty.", "value": "VJoin-index", "label": "Output Index", "editor": null, "type": "string", "order": 4}, "include_rasters": {"description": "Include rasters in the result.", "value": true, "label": "Include rasters in the result", "editor": null, "type": "boolean", "order": 2}, "type": "group", "fill": {"description": "Fill missing columns with Nan when joining.", "value": false, "label": "Fill missing with NaN", "editor": null, "type": "boolean", "order": 3}}]]></parameters>
+    <ports>
+      <input key="port0" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{f475d83f-5331-4f7d-b9c3-de365033e255}">
+        <label>ADAFs</label>
+        <description>ADAFs</description>
+      </input>
+      <output key="port0" requiresdata="False" scheme="hdf5" type="adaf" uuid="{7e756f6a-91cf-4de2-b587-9cf008a4e9d0}">
+        <label>ADAFOutput</label>
+        <description>ADAFOutput</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.importadaf" uuid="{058be941-245c-4b1f-b363-21a858dd8da7}" width="50.0" x="1325.0" y="3125.0">
+    <label>ADAF</label>
+    <description>Data source as ADAF</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"custom_importer_data": {"ATF": {"measurements": {"description": "The measurements to import.", "passthrough": false, "list": [], "value": [], "label": "Select measurements:", "editor": {"buttons": true, "type": "listview", "selection": "multi", "invertbutton": true}, "value_names": [], "type": "list"}, "type": "group", "timeseries": {"editor": null, "type": "boolean", "description": "Import timeseries.", "value": true, "label": "Import timeseries:"}, "label": ""}, "CM-ERG": {"type": "group", "label": ""}, "Auto": {"type": "group", "order": 0, "label": ""}, "MDF": {"type": "group", "label": "", "default_file": {"editor": {"filter": ["Any files (*)"], "type": "filename"}, "type": "string", "description": "", "value": "", "label": "Default file:"}, "encoding": {"editor": null, "type": "string", "description": "The name of a character encoding as recognized by python.", "value": "latin1", "label": "Character Encoding:"}}, "LAA": {"type": "group", "label": ""}, "DIVA": {"type": "group", "label": ""}, "label": "", "type": "group", "order": 1, "ADAF": {"import_links": {"editor": null, "type": "boolean", "description": "Import with links to source file, this file and any files that it may link to  must not be moved while the flow is opened.", "value": false, "label": "Import with links to source file"}, "type": "group", "label": ""}}, "active_importer": {"description": "", "value": "ADAF", "label": "", "editor": null, "type": "string", "order": 0}, "fail_strategy": {"description": "", "passthrough": false, "list": ["Exception", "Create Empty Entry"], "value": [0], "label": "Action on import failure", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 2}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="" requiresdata="False" scheme="text" type="datasource" uuid="{3f2021d1-2c18-4392-9cc1-d70cf0c48986}">
+        <label>Datasource</label>
+        <description>Datasource</description>
+      </input>
+      <output key="" requiresdata="False" scheme="hdf5" type="adaf" uuid="{830ebfcb-0b5e-4f07-bd6b-385cd7f02be1}">
+        <label>ADAFOutput</label>
+        <description>ADAFOutput</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.hjoinadaf" uuid="{05fd5e28-21c7-4f44-8a5a-69ff2475adcd}" width="50.0" x="1450.0" y="2150.0">
+    <label>HJoin ADAF</label>
+    <description>HJoin two ADAF files.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(c) 2013 Combine AB</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group"}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="adaf" uuid="{ed86cb29-de91-478c-834f-69bab9bf9b18}">
+        <label>ADAF1</label>
+        <description>ADAF1</description>
+      </input>
+      <input key="port2" requiresdata="False" scheme="hdf5" type="adaf" uuid="{56ec7419-8b41-4259-82c4-c2b4901e278d}">
+        <label>ADAF2</label>
+        <description>ADAF2</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="adaf" uuid="{ef3769d7-e0e3-408d-b393-2759f4adf809}">
+        <label>ADAFOutput</label>
+        <description>ADAFOutput</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.random.randomadafs" uuid="{09bd921a-7b8a-400e-a71e-5edf76abb32f}" width="50.0" x="1200.0" y="2075.0">
+    <label>Random ADAFs</label>
+    <description>Random ADAFs generator.</description>
+    <author>Erik der Hagopian &lt;erik.hagopian@combine.se&gt;</author>
+    <copyright>(c) 2013 Combine AB</copyright>
+    <version>0.1</version>
+    <parameters type="json"><![CDATA[{"rasters": {"description": "The number of rasters to be generated.", "value": 1, "label": "Rasters per system", "editor": {"max": 100, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "res_attributes": {"description": "The number of res attributes to be generated.", "value": 1, "label": "Res attributes", "editor": {"max": 10000, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "meta_attributes": {"description": "The number of meta attributes to be generated.", "value": 1, "label": "Meta attributes", "editor": {"max": 10000, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "signal_length": {"description": "The length of signals to be generated.", "value": 3, "label": "Signal length", "editor": {"max": 100000000, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "res_entries": {"description": "The number of res entries to be generated.", "value": 1, "label": "Res entries", "editor": {"max": 1000000, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "length": {"description": "The length of adaf list to be generated.", "value": 2, "label": "ADAF list length", "editor": {"max": 10000, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "signal_entries": {"description": "The number of signal entries to be generated.", "value": 1, "label": "Signals entries per raster", "editor": {"max": 1000000, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "systems": {"description": "The number of systems to be generated.", "value": 1, "label": "Systems", "editor": {"max": 100, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "meta_entries": {"description": "The number of meta entries to be generated.", "value": 1, "label": "Meta entries", "editor": {"max": 1000000, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "signal_attributes": {"description": "The number of signal attributes to be generated.", "value": 1, "label": "Signal attributes", "editor": {"max": 100, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "type": "group"}]]></parameters>
+    <ports>
+      <output key="port0" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{a6b29428-b337-11e2-81b4-a82066005e3c}">
+        <label>None</label>
+        <description>None</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.export.exportadafs" uuid="{09f6bfd9-e973-4f68-9d9e-41ed84ea17af}" width="50.0" x="1450.0" y="2875.0">
+    <label>Export ADAFs</label>
+    <description>Export ADAFs</description>
+    <author>Alexander Busck &lt;alexander.busck@combine.se&gt;</author>
+    <copyright>(c) 2013 Combine AB</copyright>
+    <version>0.1</version>
+    <parameters type="json"><![CDATA[{"directory": {"description": "Select the directory where to export the files.", "value": ".", "label": "Output directory", "editor": {"type": "dirname"}, "type": "string", "order": 0}, "type": "group", "active_exporter": {"description": "", "type": "string", "order": 0, "value": "HDF5", "label": ""}, "custom_exporter_data": {"type": "group", "label": "", "MDF": {"column_as_name": {"description": "", "passthrough": false, "list": ["meta_col0"], "value": [0], "label": "", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "encoding": {"description": "All strings in the adaf file will be encoded using this character encoding.", "type": "string", "order": 0, "value": "latin1", "label": "Character encoding:"}, "use_filename_strategy": {"description": "Use a strategy to create the filename(s).", "type": "boolean", "order": 0, "value": false, "label": "Use filename strategy"}, "use_column_as_name": {"description": "Use a data column from meta or result as the filename.", "type": "boolean", "order": 0, "value": false, "label": "Use a column as name"}, "label": "", "selected_strategy": {"description": "The selected filename strategy.", "passthrough": false, "list": ["Source identifier as name", "Column as name"], "value": [0], "label": "Selected strategy", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "type": "group", "order": 0, "filename_extension": {"description": "", "type": "string", "order": 0, "value": "dat", "label": "Filename extension"}}, "order": 0, "HDF5": {"column_as_name": {"description": "", "passthrough": false, "list": ["meta_col0"], "value": [0], "label": "", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "use_filename_strategy": {"description": "Use a strategy to create the filename(s).", "type": "boolean", "order": 0, "value": false, "label": "Use filename strategy"}, "use_column_as_name": {"description": "Use a data column from meta or result as the filename.", "type": "boolean", "order": 0, "value": false, "label": "Use a column as name"}, "label": "", "selected_strategy": {"description": "The selected filename strategy.", "passthrough": false, "list": ["Source identifier as name", "Column as name"], "value": [0], "label": "Selected strategy", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "type": "group", "order": 0, "filename_extension": {"description": "", "type": "string", "order": 0, "value": "sydata", "label": "Filename extension"}}}, "filename": {"description": "Filename without extension.", "type": "string", "order": 0, "value": "export_mdf", "label": "Filename"}}]]></parameters>
+    <ports>
+      <input key="port0" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{8d174ca9-8e1d-4e25-8b1e-00c89598a821}">
+        <label>ADAFs</label>
+        <description>ADAFs</description>
+      </input>
+      <output key="port0" requiresdata="False" scheme="text" type="[datasource]" uuid="{c714be69-0075-48d9-a223-b302b8c92165}">
+        <label>Datasources</label>
+        <description>Datasources</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.adaf2adafs" uuid="{0bdfd12b-eb9a-407c-84d0-235c4dc644e2}" width="50.0" x="1325.0" y="1775.0">
+    <label>ADAF2ADAFs</label>
+    <description>Converts a single ADAF to a list.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group"}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="adaf" uuid="{58f68133-ec2d-4e12-9c94-19c46d231035}">
+        <label>Input</label>
+        <description>Input</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{ddf9c7a9-6522-4409-b23f-a0cfb19e9118}">
+        <label>Output</label>
+        <description>Output</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.list.getitemadaf" uuid="{0fbd875f-a0b3-4456-b943-1cbba27f9d7f}" width="50.0" x="1325.0" y="2150.0">
+    <label>Get Item ADAF</label>
+    <description>Get an item from a list</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "combo": {"description": "List indexes.", "passthrough": false, "list": ["0"], "value": [0], "label": "Index", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 10}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{74fd739d-ea59-4391-8932-52236a201b8e}">
+        <label>List</label>
+        <description>List</description>
+      </input>
+      <output key="port3" requiresdata="False" scheme="hdf5" type="adaf" uuid="{c8d8f57b-880c-4162-8702-078b5e21ec13}">
+        <label>Item</label>
+        <description>Item</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.datasources.filedatasource" uuid="{106856a0-7a0e-4b17-b425-72d1ffdf1ae4}" width="50.0" x="1200.0" y="2625.0">
+    <label>MDF stored in Zip</label>
+    <description>Select a data source.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"db_password": {"description": "A valid password for the selected user.", "value": "", "label": "Password", "editor": null, "type": "string", "order": 6}, "filename": {"description": "A filename including path if needed", "value": "data/mdf.zip", "label": "Filename", "editor": {"filter": ["Any files (*)"], "type": "filename"}, "type": "string", "order": 1}, "db_driver": {"description": "Database driver to use.", "passthrough": false, "list": ["SQL Server"], "value": [0], "label": "Database driver", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 2}, "db_connection_string": {"description": "A connection string that will override other settings.", "value": "", "label": "Connection string", "editor": null, "type": "string", "order": 7}, "db_user": {"description": "A valid database user.", "value": "", "label": "User", "editor": null, "type": "string", "order": 5}, "db_databasename": {"description": "The name of the database.", "value": "", "label": "Database name", "editor": null, "type": "string", "order": 4}, "db_servername": {"description": "A valid name to a database server.", "value": "", "label": "Server name", "editor": null, "type": "string", "order": 3}, "use_relative_path": {"description": "Use the relative path to the file.", "value": true, "label": "Use relative path", "editor": null, "type": "boolean", "order": 0}, "type": "group", "datasource_type": {"description": "Type of datasource.", "passthrough": false, "list": ["File", "Database"], "value": [0], "label": "Datasource type", "editor": null, "value_names": [], "type": "list", "order": 8}}]]></parameters>
+    <ports>
+      <output key="port1" requiresdata="False" scheme="text" type="datasource" uuid="{97e54938-844b-4153-af27-53ee7699819c}">
+        <label>DataSource</label>
+        <description>DataSource</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.selectors.categoryselectormultiple" uuid="{120450a2-4567-4a79-95ed-6d5ac53e5e09}" width="50.0" x="1325.0" y="2225.0">
+    <label>Category Selector</label>
+    <description>Select what catgories to exist in the output ADAFs.</description>
+    <author>Erik der Hagopian &lt;erik.hagopian@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"select_res": {"description": "Select the result group for inclusion in the output.", "value": true, "label": "Select result group", "editor": null, "type": "boolean", "order": 1}, "select_meta": {"description": "Select the meta group for inclusion in the output.", "value": true, "label": "Select meta group", "editor": null, "type": "boolean", "order": 0}, "type": "group", "select_ts": {"description": "Select the timeseries group for inclusion in the output.", "value": true, "label": "Select timeseries group", "editor": null, "type": "boolean", "order": 2}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{e31fc31f-eae4-4dd7-b7f8-a4720b42c5a8}">
+        <label>Port1</label>
+        <description>Port1</description>
+      </input>
+      <output key="port3" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{f4f0a876-cba3-47c5-b70d-a4c8d876a5fb}">
+        <label>Port3</label>
+        <description>Port3</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.importadaf" uuid="{13d1e9f2-109e-49e9-aeb7-36f221e7620d}" width="50.0" x="1325.0" y="2400.0">
+    <label>ADAF MDF</label>
+    <description>Data source as ADAF</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"custom_importer_data": {"ATF": {"measurements": {"description": "The measurements to import.", "passthrough": false, "list": ["!E", "!H", "!P", "!R", "$B", "$E", "$M", "$U", "D"], "value": [0], "label": "Select measurements:", "editor": {"buttons": true, "type": "listview", "selection": "multi", "invertbutton": true}, "value_names": ["!E"], "type": "list", "order": 0}, "type": "group", "timeseries": {"description": "Import timeseries.", "type": "boolean", "order": 0, "value": true, "label": "Import timeseries:"}}, "Auto": {"type": "group", "order": 0, "label": ""}, "MDF": {"type": "group", "encoding": {"description": "", "type": "string", "order": 0, "value": "latin1", "label": "Character Encoding:"}}, "LAA": {"type": "group"}, "DIVA": {"type": "group"}, "label": "", "type": "group", "order": 0, "ADAF": {"type": "group"}}, "active_importer": {"description": "", "type": "string", "order": 0, "value": "Auto", "label": ""}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="Port0" requiresdata="False" scheme="text" type="datasource" uuid="{706a30b5-5f9d-4601-a325-6afd5410d158}">
+        <label>Datasource</label>
+        <description>Datasource</description>
+      </input>
+      <output key="Port0" requiresdata="False" scheme="hdf5" type="adaf" uuid="{3df216c5-a496-413b-8da8-142746b41057}">
+        <label>ADAFOutput</label>
+        <description>ADAFOutput</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.table.tables2adafs" uuid="{18823e78-7404-482f-9d26-5f77e1d3727d}" width="50.0" x="1450.0" y="1925.0">
+    <label>Tables2ADAFs</label>
+    <description>Convert Tables to ADAFs</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"tb": {"description": "", "passthrough": false, "list": ["raster0", "signal0"], "value": [0], "label": "Time basis column", "editor": {"filter": true, "type": "listview"}, "value_names": ["raster0"], "type": "list", "order": 2}, "export_to_group": {"description": "Group to put table data.", "passthrough": false, "list": ["Meta", "Result", "Time series"], "value": [2], "label": "Export to group", "editor": {"type": "combobox"}, "value_names": ["Time series"], "type": "list", "order": 0}, "type": "group", "system": {"description": "", "type": "string", "order": 1, "value": "system_39752", "label": "Time series system name"}, "raster": {"description": "", "type": "string", "order": 2, "value": "raster0", "label": "Time series raster name"}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="[table]" uuid="{00126da0-6965-446b-80e0-c3316fad3761}">
+        <label>Table</label>
+        <description>Table</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{a4a01748-4efa-47bc-a954-22f3ca3ff048}">
+        <label>ADAF</label>
+        <description>ADAF</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.timesyncadaf" uuid="{1c03438b-87ed-4e74-afa0-1ca40a1c9c83}" width="50.0" x="1575.0" y="2150.0">
+    <label>TimeSync ADAF</label>
+    <description>Synchronize time between systems.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(c) 2013 Combine AB</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"refsignal": {"type": "string", "description": "Selected refsignal", "value": "y"}, "syncstrategy": {"type": "string", "description": "Selected synchronization strategy", "value": "OptimizationLSF"}, "synceesignal": {"type": "string", "description": "Selected synceesignal", "value": "y"}, "synceesystem": {"type": "string", "description": "Selected synceesystem", "value": "DIVA"}, "refsystem": {"type": "string", "description": "Selected refsystem", "value": "DIVA"}, "threshold": {"type": "float", "description": "Threshold", "value": 10}, "synceeoffset": {"type": "float", "description": "Syncee offset", "value": 0}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="adaf" uuid="{85bb77c6-f3ee-407e-ac45-5176992857b6}">
+        <label>ADAF Input</label>
+        <description>ADAF Input</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="adaf" uuid="{5cff0c4a-6fd7-4ea5-afe8-1098210e0df4}">
+        <label>ADAF Output</label>
+        <description>ADAF Output</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.adafs2tables" uuid="{206947e0-761d-49a3-a1b5-ddcaefcdd10f}" width="50.0" x="1325.0" y="1925.0">
+    <label>ADAFs2Tables TS</label>
+    <description>Elementwise export of data from list of ADAFs to a list of Tables.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "export_group": {"description": "Group to export.", "passthrough": false, "list": ["Meta", "Result", "Time series"], "value": [2], "label": "Export group", "editor": {"type": "combobox"}, "value_names": ["Time series"], "type": "list", "order": 0}, "tb": {"description": "", "passthrough": false, "list": ["system0/raster0/"], "value": [0], "label": "Time basis raster", "editor": {"filter": true, "type": "listview"}, "value_names": ["system0/raster0/"], "type": "list", "order": 2}, "tb_col_name": {"description": "", "type": "string", "order": 4, "value": "raster0", "label": "Time basis column name"}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{09861fb7-38c8-45f2-a2c3-0c2cad80a45b}">
+        <label>ADAF</label>
+        <description>ADAF</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[table]" uuid="{44c7ac00-ae3c-4010-8ab2-de0443c9f75c}">
+        <label>Table</label>
+        <description>Table</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.datasources.filedatasource" uuid="{22b783c8-4c37-4854-be70-cbb811217a80}" width="50.0" x="1200.0" y="2300.0">
+    <label>Datasource</label>
+    <description>Select a data source.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"use_relative_path": {"description": "Use the relative path to the file.", "value": true, "label": "Use relative path", "editor": null, "type": "boolean", "order": 0}, "db_password": {"description": "A valid password for the selected user.", "value": "", "label": "Password", "editor": null, "type": "string", "order": 6}, "db_driver": {"description": "Database driver to use.", "passthrough": false, "list": ["SQL Server"], "value": [0], "label": "Database driver", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 2}, "db_connection_string": {"description": "A connection string that will override other settings.", "value": "", "label": "Connection string", "editor": null, "type": "string", "order": 7}, "db_user": {"description": "A valid database user.", "value": "", "label": "User", "editor": null, "type": "string", "order": 5}, "db_databasename": {"description": "The name of the database.", "value": "", "label": "Database name", "editor": null, "type": "string", "order": 4}, "db_servername": {"description": "A valid name to a database server.", "value": "", "label": "Server name", "editor": null, "type": "string", "order": 3}, "filename": {"description": "A filename including path if needed", "value": "data/diva.txt", "label": "Filename", "editor": {"filter": ["Any files (*)"], "type": "filename"}, "type": "string", "order": 1}, "type": "group", "datasource_type": {"description": "Type of datasource.", "passthrough": false, "list": ["File", "Database"], "value": [0], "label": "Datasource type", "editor": null, "value_names": [], "type": "list", "order": 999}}]]></parameters>
+    <ports>
+      <output key="port1" requiresdata="False" scheme="text" type="datasource" uuid="{694ff6c1-93fd-4d19-bda6-e4d0ae80629c}">
+        <label>DataSource</label>
+        <description>DataSource</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.importadaf" uuid="{23e6db7f-1182-4f52-b7cc-0e422d73692a}" width="50.0" x="1325.0" y="2300.0">
+    <label>ADAF Diva</label>
+    <description>Data source as ADAF</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"custom_importer_data": {"Auto": {"type": "group", "order": 0, "label": ""}, "type": "group", "order": 0, "label": ""}, "active_importer": {"description": "", "type": "string", "order": 0, "value": "Auto", "label": ""}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="Port0" requiresdata="False" scheme="text" type="datasource" uuid="{ed6de058-403f-41f8-bf7b-b8c3e5cbdf45}">
+        <label>Datasource</label>
+        <description>Datasource</description>
+      </input>
+      <output key="Port0" requiresdata="False" scheme="hdf5" type="adaf" uuid="{3facd851-3c7b-49cd-b571-039dab510757}">
+        <label>ADAFOutput</label>
+        <description>ADAFOutput</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.importadaf" uuid="{263a6876-fdd9-4c2c-97cc-2e29a30a4146}" width="50.0" x="1325.0" y="2625.0">
+    <label>ADAF MDF</label>
+    <description>Data source as ADAF</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"custom_importer_data": {"ATF": {"measurements": {"description": "The measurements to import.", "passthrough": false, "list": ["!E", "!H", "!P", "!R", "$B", "$E", "$M", "$U", "D"], "value": [0], "label": "Select measurements:", "editor": {"buttons": true, "type": "listview", "selection": "multi", "invertbutton": true}, "value_names": ["!E"], "type": "list", "order": 0}, "type": "group", "timeseries": {"description": "Import timeseries.", "value": true, "label": "Import timeseries:", "editor": null, "type": "boolean", "order": 0}}, "CM-ERG": {"type": "group", "label": ""}, "Auto": {"type": "group", "order": 0, "label": ""}, "MDF": {"type": "group", "default_file": {"label": "Default file:", "type": "string", "editor": {"filter": ["Any files (*)"], "type": "filename"}, "value": "", "description": ""}, "encoding": {"description": "", "value": "latin1", "label": "Character Encoding:", "editor": null, "type": "string", "order": 0}}, "LAA": {"type": "group"}, "DIVA": {"type": "group"}, "label": "", "type": "group", "order": 1, "ADAF": {"import_links": {"label": "Import with links to source file", "type": "boolean", "editor": null, "value": false, "description": "Import with links to source file, this file and any files that it may link to  must not be moved while the flow is opened."}, "type": "group"}}, "active_importer": {"description": "", "value": "Auto", "label": "", "editor": null, "type": "string", "order": 0}, "fail_strategy": {"description": "", "passthrough": false, "list": ["Exception", "Create Empty Entry"], "value": [0], "label": "Action on import failure", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 2}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="Port0" requiresdata="False" scheme="text" type="datasource" uuid="{a8bc410c-c5e6-440b-a758-1ec2544a8562}">
+        <label>Datasource</label>
+        <description>Datasource</description>
+      </input>
+      <output key="Port0" requiresdata="False" scheme="hdf5" type="adaf" uuid="{746dad14-7303-437a-87f8-8250ab9ae32d}">
+        <label>ADAFOutput</label>
+        <description>ADAFOutput</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.functionselectoradaf" uuid="{293bba44-c35c-4523-8834-524c712579f7}" width="50.0" x="1450.0" y="1550.0">
+    <label>F(x) ADAF</label>
+    <description>Select functions from the datasource to be applied to the incoming ADAF.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2012 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "clean_output": {"description": "Do not copy the input data to the output.", "type": "boolean", "order": 0, "value": false, "label": "Clean output"}, "selected_functions": {"description": "Select the functions to apply.", "passthrough": false, "list": ["PrintOnePlus1"], "value": [0], "label": "Select functions", "editor": {"buttons": true, "filter": true, "selection": "multi", "type": "listview", "passthrough": true}, "value_names": ["PrintOnePlus1"], "type": "list", "order": 1}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="True" scheme="text" type="datasource" uuid="{a6b30887-b337-11e2-ba7f-a82066005e3c}">
+        <label>None</label>
+        <description>None</description>
+      </input>
+      <input key="port2" requiresdata="False" scheme="hdf5" type="adaf" uuid="{a6b30717-b337-11e2-8290-a82066005e3c}">
+        <label>None</label>
+        <description>None</description>
+      </input>
+      <output key="port3" requiresdata="False" scheme="hdf5" type="adaf" uuid="{a6b309c7-b337-11e2-abeb-a82066005e3c}">
+        <label>None</label>
+        <description>None</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.importadaf" uuid="{2b765e5a-bfbd-4c62-bb15-48c1c5b86e33}" width="50.0" x="1325.0" y="3225.0">
+    <label>ADAF</label>
+    <description>Data source as ADAF</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"custom_importer_data": {"ATF": {"measurements": {"description": "The measurements to import.", "passthrough": false, "list": [], "value": [], "label": "Select measurements:", "editor": {"buttons": true, "type": "listview", "selection": "multi", "invertbutton": true}, "value_names": [], "type": "list"}, "type": "group", "timeseries": {"editor": null, "type": "boolean", "description": "Import timeseries.", "value": true, "label": "Import timeseries:"}, "label": ""}, "CM-ERG": {"type": "group", "label": ""}, "Auto": {"type": "group", "order": 0, "label": ""}, "MDF": {"type": "group", "label": "", "default_file": {"editor": {"filter": ["Any files (*)"], "type": "filename"}, "type": "string", "description": "", "value": "", "label": "Default file:"}, "encoding": {"editor": null, "type": "string", "description": "The name of a character encoding as recognized by python.", "value": "latin1", "label": "Character Encoding:"}}, "LAA": {"type": "group", "label": ""}, "DIVA": {"type": "group", "label": ""}, "label": "", "type": "group", "order": 1, "ADAF": {"import_links": {"editor": null, "type": "boolean", "description": "Import with links to source file, this file and any files that it may link to  must not be moved while the flow is opened.", "value": true, "label": "Import with links to source file"}, "type": "group", "label": ""}}, "active_importer": {"description": "", "value": "ADAF", "label": "", "editor": null, "type": "string", "order": 0}, "fail_strategy": {"description": "", "passthrough": false, "list": ["Exception", "Create Empty Entry"], "value": [0], "label": "Action on import failure", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 2}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="" requiresdata="False" scheme="text" type="datasource" uuid="{0c8279ed-935b-4289-8450-db6445b1dc32}">
+        <label>Datasource</label>
+        <description>Datasource</description>
+      </input>
+      <output key="" requiresdata="False" scheme="hdf5" type="adaf" uuid="{3c3a88db-773d-4a29-8af7-8546c8e7005b}">
+        <label>ADAFOutput</label>
+        <description>ADAFOutput</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.adaf2adafs" uuid="{37a6aceb-d281-4fcc-87c9-6f45b9d396a5}" width="50.0" x="1575.0" y="2575.0">
+    <label>ADAF2ADAFs</label>
+    <description>Converts a single ADAF to a list.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group"}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="adaf" uuid="{7fe045d9-0892-4e27-a4c8-608ffd46a574}">
+        <label>Input</label>
+        <description>Input</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{dd5381f4-7263-41d2-af52-082bef39e904}">
+        <label>Output</label>
+        <description>Output</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.importadafs" uuid="{44564982-903b-4a84-82d7-fab5dc46ad79}" width="50.0" x="1325.0" y="2825.0">
+    <label>ADAFs</label>
+    <description>Import multiple adaf files</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"custom_importer_data": {"ATF": {"measurements": {"description": "The measurements to import.", "passthrough": false, "list": [], "value": [], "label": "Select measurements:", "editor": {"buttons": true, "type": "listview", "selection": "multi", "invertbutton": true}, "value_names": [], "type": "list"}, "type": "group", "timeseries": {"editor": null, "type": "boolean", "description": "Import timeseries.", "value": true, "label": "Import timeseries:"}, "label": ""}, "CM-ERG": {"type": "group", "label": ""}, "Auto": {"type": "group", "order": 0, "label": ""}, "MDF": {"type": "group", "label": "", "default_file": {"editor": {"filter": ["Any files (*)"], "type": "filename"}, "type": "string", "description": "", "value": "", "label": "Default file:"}, "encoding": {"editor": null, "type": "string", "description": "The name of a character encoding as recognized by python.", "value": "latin1", "label": "Character Encoding:"}}, "LAA": {"type": "group", "label": ""}, "DIVA": {"type": "group", "label": ""}, "label": "", "type": "group", "order": 1, "ADAF": {"import_links": {"editor": null, "type": "boolean", "description": "Import with links to source file, this file and any files that it may link to  must not be moved while the flow is opened.", "value": false, "label": "Import with links to source file"}, "type": "group", "label": ""}}, "active_importer": {"description": "", "value": "ADAF", "label": "", "editor": null, "type": "string", "order": 0}, "fail_strategy": {"description": "", "passthrough": false, "list": ["Exception", "Create Empty Entry", "Skip File"], "value": [0], "label": "Action on import failure", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 2}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="bob" requiresdata="True" scheme="text" type="[datasource]" uuid="{90e3d4d2-2d97-4a91-b4f5-0f397fa47ce0}">
+        <label>Datasource</label>
+        <description>Datasource</description>
+      </input>
+      <output key="" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{3b73769a-ff6c-41fd-9e2d-ca26396e17bb}">
+        <label>ADAFOutput</label>
+        <description>ADAFOutput</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.adafs2tableslist" uuid="{48fce6ce-08a4-4162-9d4e-77f202e6f690}" width="50.0" x="1450.0" y="2725.0">
+    <label>ADAFs2TablesList Meta</label>
+    <description>Elementwise export of data from a list of ADAFs to alist of Tables.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"export_group": {"description": "Group to export.", "passthrough": false, "list": ["Meta", "Result", "Time series"], "value": [0], "label": "Export group", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{cc50f8f4-a5a4-41dc-837b-a125a60628f5}">
+        <label>ADAF</label>
+        <description>ADAF</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[table]" uuid="{28478a7c-5d7b-4b7d-ad55-c35e57c7edc7}">
+        <label>Table</label>
+        <description>Table</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.datasources.filedatasource" uuid="{4a8cec9c-73e1-481c-8ee9-c1bf5eba8a03}" width="50.0" x="1325.0" y="1550.0">
+    <label>Datasource</label>
+    <description>Select a data source.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"use_relative_path": {"description": "Use the relative path to the file.", "value": true, "label": "Use relative path", "editor": null, "type": "boolean", "order": 0}, "db_password": {"description": "A valid password for the selected user.", "value": "", "label": "Password", "editor": null, "type": "string", "order": 6}, "db_driver": {"description": "Database driver to use.", "passthrough": false, "list": ["SQL Server"], "value": [0], "label": "Database driver", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 2}, "db_connection_string": {"description": "A connection string that will override other settings.", "value": "", "label": "Connection string", "editor": null, "type": "string", "order": 7}, "db_user": {"description": "A valid database user.", "value": "", "label": "User", "editor": null, "type": "string", "order": 5}, "db_databasename": {"description": "The name of the database.", "value": "", "label": "Database name", "editor": null, "type": "string", "order": 4}, "db_servername": {"description": "A valid name to a database server.", "value": "", "label": "Server name", "editor": null, "type": "string", "order": 3}, "filename": {"description": "A filename including path if needed", "value": "data/adaf.py", "label": "Filename", "editor": {"filter": ["Any files (*)"], "type": "filename"}, "type": "string", "order": 1}, "type": "group", "datasource_type": {"description": "Type of datasource.", "passthrough": false, "list": ["File", "Database"], "value": [0], "label": "Datasource type", "editor": null, "value_names": [], "type": "list", "order": 999}}]]></parameters>
+    <ports>
+      <output key="port1" requiresdata="False" scheme="text" type="datasource" uuid="{b11a7946-2045-4ed4-8544-ff1bcacf4618}">
+        <label>DataSource</label>
+        <description>DataSource</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.random.randomadaf" uuid="{4e73d72c-26e1-4fbe-ba45-1904e483a61f}" width="50.0" x="1125.0" y="1775.0">
+    <label>Random ADAF</label>
+    <description>Random ADAF generator.</description>
+    <author>Erik der Hagopian &lt;erik.hagopian@combine.se&gt;</author>
+    <copyright>(c) 2013 Combine AB</copyright>
+    <version>0.1</version>
+    <parameters type="json"><![CDATA[{"rasters": {"description": "The number of rasters to be generated.", "value": 1, "label": "Rasters per system", "editor": {"max": 100, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "res_attributes": {"description": "The number of res attributes to be generated.", "value": 1, "label": "Res attributes", "editor": {"max": 10000, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "meta_attributes": {"description": "The number of meta attributes to be generated.", "value": 1, "label": "Meta attributes", "editor": {"max": 10000, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "signal_length": {"description": "The length of signals to be generated.", "value": 1, "label": "Signal length", "editor": {"max": 100000000, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "res_entries": {"description": "The number of res entries to be generated.", "value": 1, "label": "Res entries", "editor": {"max": 1000000, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "signal_entries": {"description": "The number of signal entries to be generated.", "value": 1, "label": "Signals entries per raster", "editor": {"max": 1000000, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "systems": {"description": "The number of systems to be generated.", "value": 1, "label": "Systems", "editor": {"max": 100, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "meta_entries": {"description": "The number of meta entries to be generated.", "value": 1, "label": "Meta entries", "editor": {"max": 1000000, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "signal_attributes": {"description": "The number of signal attributes to be generated.", "value": 1, "label": "Signal attributes", "editor": {"max": 100, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "type": "group"}]]></parameters>
+    <ports>
+      <output key="port0" requiresdata="False" scheme="hdf5" type="adaf" uuid="{a6b2d10f-b337-11e2-8304-a82066005e3c}">
+        <label>None</label>
+        <description>None</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.table.table2adaf" uuid="{549a2253-4e7b-4919-9786-208117c93110}" width="50.0" x="1450.0" y="1700.0">
+    <label>Table2ADAF</label>
+    <description>Export content of Table to specified container in ADAF.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"tb": {"description": "", "passthrough": false, "list": ["raster0", "signal0"], "value": [0], "label": "Time basis column", "editor": {"filter": true, "type": "listview"}, "value_names": ["raster0"], "type": "list", "order": 2}, "export_to_group": {"description": "Group to put table data.", "passthrough": false, "list": ["Meta", "Result", "Time series"], "value": [2], "label": "Export to group", "editor": {"type": "combobox"}, "value_names": ["Time series"], "type": "list", "order": 0}, "type": "group", "system": {"description": "", "type": "string", "order": 1, "value": "system_61384", "label": "Time series system name"}, "raster": {"description": "", "type": "string", "order": 2, "value": "raster0", "label": "Time series raster name"}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="table" uuid="{ff0f5c3d-138a-49af-b274-aecfc9c35d79}">
+        <label>Table</label>
+        <description>Table</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="adaf" uuid="{30238925-92cf-436d-a7d4-55b7f7dabb8a}">
+        <label>ADAF</label>
+        <description>ADAF</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.functionselectoradafmultiple" uuid="{563a13e5-0bd2-4011-a07d-e4213ad0c10a}" width="50.0" x="1450.0" y="1475.0">
+    <label>F(x) ADAFs</label>
+    <description>Select functions from the datasource to be applied to the ADAFs in the incoming list.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2012 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "clean_output": {"description": "Do not copy the input data to the output.", "type": "boolean", "order": 0, "value": false, "label": "Clean output"}, "selected_functions": {"description": "Select the functions to apply.", "passthrough": false, "list": ["PrintSignal0Plus1"], "value": [0], "label": "Select functions", "editor": {"buttons": true, "filter": true, "selection": "multi", "type": "listview", "passthrough": true}, "value_names": ["PrintSignal0Plus1"], "type": "list", "order": 1}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="True" scheme="text" type="datasource" uuid="{7bebd0d4-905c-48da-8841-6c26394ba9b7}">
+        <label>None</label>
+        <description>None</description>
+      </input>
+      <input key="port2" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{7574410c-fc49-4a48-89ca-18bd78673d32}">
+        <label>None</label>
+        <description>None</description>
+      </input>
+      <output key="port3" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{6884cd30-b7a8-44d4-b3e8-f87f4cbcf84f}">
+        <label>None</label>
+        <description>None</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.interpolateadafs" uuid="{5a46fb60-1fef-4fa0-8a54-4001c1ae7ff8}" width="50.0" x="1325.0" y="2000.0">
+    <label>Interpolate ADAFs</label>
+    <description>Interpolation of data</description>
+    <author>Helena Olen &lt;helena.olen@combine.se</author>
+    <copyright>(C) 2013 Combine AB</copyright>
+    <version>2.0</version>
+    <parameters type="json"><![CDATA[{"use_dt": {"description": "", "value": true, "label": "", "editor": null, "type": "boolean", "order": 0}, "int_interp_method": {"description": "Method used to interpolate integer data", "passthrough": false, "list": ["zero", "nearest", "linear", "quadratic", "cubic"], "value": [1], "label": "", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 1}, "bool_interp_method": {"description": "Method used to interpolate boolean, text, and byte string data", "passthrough": false, "list": ["zero", "nearest"], "value": [1], "label": "", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 3}, "ts": {"description": "", "passthrough": false, "list": ["signal0"], "value": [0], "label": "Choose signals", "editor": {"filter": true, "selection": "multi", "type": "listview"}, "value_names": ["signal0"], "type": "list", "order": 2}, "new_tb": {"description": "Timebasis to use as new timebasis for selected timeseries", "passthrough": false, "list": ["system0/raster0"], "value": [0], "label": "Timebasis to use for interpolation", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 4}, "resample_all_rasters": {"description": "Apply resampling to all signals", "value": true, "label": "Resample all signals", "editor": null, "type": "boolean", "order": 5}, "dt": {"description": "Time step in new timebasis. If old timebasis is of type datetime this is considered to be in seconds.", "value": 0.2, "label": "Time step", "editor": null, "type": "float", "order": 6}, "type": "group", "interpolation_method": {"description": "Method used to interpolate other data types", "passthrough": false, "list": ["zero", "nearest", "linear", "quadratic", "cubic"], "value": [2], "label": "", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 7}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{30f0be16-47d0-48db-8c6b-124b935ae212}">
+        <label>ADAFInput</label>
+        <description>ADAFInput</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{aacec720-587d-4275-9cbb-08d7680616d5}">
+        <label>ADAFOutput</label>
+        <description>ADAFOutput</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.adaf2table" uuid="{5fbd407a-6ede-47d7-b660-1bfcc3a24cd1}" width="50.0" x="1325.0" y="1700.0">
+    <label>ADAF2Table TS</label>
+    <description>Export of data from an ADAF to a Table.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "export_group": {"description": "Group to export.", "passthrough": false, "list": ["Meta", "Result", "Time series"], "value": [2], "label": "Export group", "editor": {"type": "combobox"}, "value_names": ["Time series"], "type": "list", "order": 0}, "tb": {"description": "", "passthrough": false, "list": ["system0/raster0/"], "value": [0], "label": "Time basis raster", "editor": {"filter": true, "type": "listview"}, "value_names": ["system0/raster0/"], "type": "list", "order": 2}, "tb_col_name": {"description": "", "type": "string", "order": 4, "value": "raster0", "label": "Time basis column name"}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="adaf" uuid="{287b0bab-cdf7-43d0-baa1-ef1b5da0864e}">
+        <label>ADAF</label>
+        <description>ADAF</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="table" uuid="{725e186b-64aa-474f-b4df-2387ca4dede7}">
+        <label>Table</label>
+        <description>Table</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.export.exportadafs" uuid="{64ec1280-05b4-4808-893d-e95312646ae4}" width="50.0" x="1450.0" y="1775.0">
+    <label>Export ADAFs</label>
+    <description>Export ADAFs</description>
+    <author>Alexander Busck &lt;alexander.busck@combine.se&gt;</author>
+    <copyright>(c) 2013 Combine AB</copyright>
+    <version>0.1</version>
+    <parameters type="json"><![CDATA[{"directory": {"description": "Select the directory where to export the files.", "value": "data", "label": "Output directory", "editor": {"type": "dirname"}, "type": "string", "order": 0}, "type": "group", "active_exporter": {"description": "", "value": "HDF5", "label": "", "editor": null, "type": "string", "order": 0}, "custom_exporter_data": {"type": "group", "label": "", "MDF": {"column_as_name": {"description": "", "passthrough": false, "list": [], "value": [], "label": "", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "encoding": {"description": "All strings in the adaf file will be encoded using this character encoding.", "value": "latin1", "label": "Character encoding:", "editor": null, "type": "string", "order": 0}, "use_filename_strategy": {"description": "Use a strategy to create the filename(s).", "value": false, "label": "Use filename strategy", "editor": null, "type": "boolean", "order": 0}, "use_column_as_name": {"description": "Use a data column from meta or result as the filename.", "value": false, "label": "Use a column as name", "editor": null, "type": "boolean", "order": 0}, "label": "", "selected_strategy": {"description": "The selected filename strategy.", "passthrough": false, "list": ["Source identifier as name", "Column as name"], "value": [0], "label": "Selected strategy", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "type": "group", "order": 0, "filename_extension": {"description": "", "value": "dat", "label": "Filename extension", "editor": null, "type": "string", "order": 0}}, "order": 0, "HDF5": {"column_as_name": {"description": "", "passthrough": false, "list": [], "value": [], "label": "", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "use_filename_strategy": {"description": "Use a strategy to create the filename(s).", "value": false, "label": "Use filename strategy", "editor": null, "type": "boolean", "order": 0}, "use_column_as_name": {"description": "Use a data column from meta or result as the filename.", "value": false, "label": "Use a column as name", "editor": null, "type": "boolean", "order": 0}, "label": "", "selected_strategy": {"description": "The selected filename strategy.", "passthrough": false, "list": ["Source identifier as name", "Column as name"], "value": [0], "label": "Selected strategy", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "type": "group", "order": 0, "filename_extension": {"description": "", "value": "sydata", "label": "Filename extension", "editor": null, "type": "string", "order": 0}}}, "filename": {"description": "Filename without extension.", "value": "export_random", "label": "Filename", "editor": null, "type": "string", "order": 0}}]]></parameters>
+    <ports>
+      <input key="port0" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{69b26c68-e699-40cd-b538-c8e6b3f7307e}">
+        <label>ADAFs</label>
+        <description>ADAFs</description>
+      </input>
+      <output key="port0" requiresdata="False" scheme="text" type="[datasource]" uuid="{a6cfc8f0-f0f0-4c23-bc47-66420f3882fa}">
+        <label>Datasources</label>
+        <description>Datasources</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.vsplitadafnode" uuid="{6685cd5e-e064-4cd4-9b3d-9ca8392e4bb7}" width="50.0" x="1575.0" y="2075.0">
+    <label>VSplit ADAF</label>
+    <description>Split an ADAF into multiple ADAFs.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"include_rasters": {"description": "Include rasters in the result.", "value": true, "label": "Include rasters in the result", "editor": null, "type": "boolean", "order": 0}, "remove_fill": {"description": "Remove split columns which contain only NaN.", "value": false, "label": "Remove fill", "editor": null, "type": "boolean", "order": 1}, "type": "group", "ungrouped_elements": {"description": "Ungrouped elements.", "passthrough": false, "list": ["Belong to first group", "Belong to separate group", "Belong to all groups"], "value": [0], "label": "Ungrouped elements", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 2}, "input_index": {"description": "Choose name for sorted index column. Required in both metadata and results.", "value": "VJoin-index", "label": "Input Index", "editor": null, "type": "string", "order": 3}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="adaf" uuid="{573f9011-1294-4783-a766-45950039d8b3}">
+        <label>ADAF</label>
+        <description>ADAF</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{6addbb32-4319-42bf-ac7e-8088f46d8560}">
+        <label>ADAFs</label>
+        <description>ADAFs</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.table.table2adaf" uuid="{6def1ad6-e2ac-4f97-b0bd-6e97f0f8f7f7}" width="50.0" x="1450.0" y="1625.0">
+    <label>Table2ADAF</label>
+    <description>Export content of Table to specified container in ADAF.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"tb": {"description": "", "passthrough": false, "list": ["meta_col0"], "value": [0], "label": "Time basis column", "editor": {"filter": true, "type": "listview"}, "value_names": ["meta_col0"], "type": "list", "order": 2}, "export_to_group": {"description": "Group to put table data.", "passthrough": false, "list": ["Meta", "Result", "Time series"], "value": [0], "label": "Export to group", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "type": "group", "system": {"description": "", "type": "string", "order": 1, "value": "system_12818", "label": "Time series system name"}, "raster": {"description": "", "type": "string", "order": 2, "value": "meta_col0", "label": "Time series raster name"}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="table" uuid="{0889867a-39f6-4090-bd41-a4004a4825ed}">
+        <label>Table</label>
+        <description>Table</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="adaf" uuid="{befa1a67-638d-4ab3-ae89-e800c5aeb5de}">
+        <label>ADAF</label>
+        <description>ADAF</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.sortadafsnode" uuid="{7ba75f75-86e7-459e-b871-67e5c44ee228}" width="50.0" x="1325.0" y="2075.0">
+    <label>SortADAFs</label>
+    <description>Sort ADAF list.</description>
+    <author>Helena Olen &lt;helena.olen@combine.se&gt;</author>
+    <copyright>(c) 2013 Combine AB</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"sort_function": {"description": "", "value": "lambda adaf: adaf.meta['meta_col0'].value()", "label": "", "editor": null, "type": "string", "order": 0}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{2c42a87b-0439-4499-9523-cebb41f82fb4}">
+        <label>ADAF</label>
+        <description>ADAF</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{18d4cc5e-4699-4f5f-a790-7ed504d14a85}">
+        <label>SortedADAF</label>
+        <description>SortedADAF</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.adafs2tables" uuid="{8078f866-0df1-4211-8e0f-0061f392a7f6}" width="50.0" x="1325.0" y="1850.0">
+    <label>ADAFs2Tables Meta</label>
+    <description>Elementwise export of data from list of ADAFs to a list of Tables.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "export_group": {"description": "Group to export.", "passthrough": false, "list": ["Meta", "Result", "Time series"], "value": [0], "label": "Export group", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "tb": {"description": "", "passthrough": false, "list": [], "value": [], "label": "Time basis raster", "editor": {"filter": true, "type": "listview"}, "value_names": [], "type": "list", "order": 2}, "tb_col_name": {"description": "", "type": "string", "order": 4, "value": "", "label": "Time basis column name"}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{9bc2c024-aee4-4bb2-973b-06d8c51a28e3}">
+        <label>ADAF</label>
+        <description>ADAF</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[table]" uuid="{ba9df037-1bb9-403f-ae51-1075ce529ddf}">
+        <label>Table</label>
+        <description>Table</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.adaf2adafs" uuid="{870418fb-8bf5-4a24-948e-e5c6aa8e5c03}" width="50.0" x="1450.0" y="2400.0">
+    <label>ADAF2ADAFs</label>
+    <description>Converts a single ADAF to a list.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group"}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="adaf" uuid="{88702a51-1b0c-46a0-be11-9585a839964b}">
+        <label>Input</label>
+        <description>Input</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{55c1e94a-76ba-4ece-9591-e67522852d03}">
+        <label>Output</label>
+        <description>Output</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.table.tables2adafs" uuid="{96f17ad9-6538-46e1-90e0-dd40a2140565}" width="50.0" x="1450.0" y="1850.0">
+    <label>Tables2ADAFs</label>
+    <description>Convert Tables to ADAFs</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"tb": {"description": "", "passthrough": false, "list": ["meta_col0"], "value": [0], "label": "Time basis column", "editor": {"filter": true, "type": "listview"}, "value_names": ["meta_col0"], "type": "list", "order": 2}, "export_to_group": {"description": "Group to put table data.", "passthrough": false, "list": ["Meta", "Result", "Time series"], "value": [0], "label": "Export to group", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "type": "group", "system": {"description": "", "type": "string", "order": 1, "value": "system_71416", "label": "Time series system name"}, "raster": {"description": "", "type": "string", "order": 2, "value": "meta_col0", "label": "Time series raster name"}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="[table]" uuid="{4b778b9a-3c1b-4416-ad01-7f215abb8b1a}">
+        <label>Table</label>
+        <description>Table</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{12323675-0c96-4857-8e01-ce0f325219f0}">
+        <label>ADAF</label>
+        <description>ADAF</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.adaf2tables" uuid="{9c0ca3ab-26e7-4e4c-b12f-2d12a9106898}" width="50.0" x="1450.0" y="2300.0">
+    <label>ADAF2Tables</label>
+    <description>Export of data from an ADAF to a list of Tables.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"export_group": {"description": "Group to export.", "passthrough": false, "list": ["Meta", "Result", "Time series"], "value": [0], "label": "Export group", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="adaf" uuid="{523ae5f5-edcf-49ee-b1dd-d04e9d4206f3}">
+        <label>ADAF</label>
+        <description>ADAF</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[table]" uuid="{e8228e44-8c98-44a2-8b08-1cb37261df7f}">
+        <label>Table</label>
+        <description>Table</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.filteradafs" uuid="{a240e7b2-bf4b-4038-80c3-62dec1717cee}" width="50.0" x="1700.0" y="2075.0">
+    <label>FilterADAFs</label>
+    <description>Filter ADAF data.</description>
+    <author>Helena Olen &lt;helena.olen@combine.se&gt;</author>
+    <copyright>(c) 2013 Combine AB</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"numerator_coeff": {"description": "Numerator coefficient vector for filter", "value": "", "label": "Numerator coefficient vector", "editor": null, "type": "string", "order": 0}, "filtering": {"description": "Filtering types", "passthrough": false, "list": ["Forward", "Forward-Backward"], "value": [0], "label": "Filtering", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "fir_len": {"description": "", "value": "", "label": "", "editor": null, "type": "string", "order": 0}, "iir_ws": {"description": "", "value": "0.9", "label": "", "editor": null, "type": "string", "order": 0}, "custom_filter": {"description": "", "value": false, "label": "", "editor": null, "type": "boolean", "order": 0}, "fir_w1": {"description": "", "value": "", "label": "", "editor": null, "type": "string", "order": 0}, "type": "group", "fir_w2": {"description": "", "value": "", "label": "", "editor": null, "type": "string", "order": 0}, "filter_type": {"description": "Combo of filter types", "passthrough": false, "list": ["IIR", "FIR"], "value": [0], "label": "Filter type", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "denominator_coeff": {"description": "Denominator coefficient vector for filter", "value": "", "label": "Denominator coefficient vector", "editor": null, "type": "string", "order": 0}, "iir_gpass": {"description": "", "value": "3", "label": "", "editor": null, "type": "string", "order": 0}, "iir_filters": {"description": "IIR filters", "passthrough": false, "list": ["Butterworth", "Chebyshev 1", "Chebyshev 2", "Elliptic"], "value": [0], "label": "Filter designs", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "filter_parameters": {"description": "Parameters for chosen filter", "value": "", "label": "Filter parameters", "editor": null, "type": "string", "order": 0}, "fir_windows": {"description": "Filter windows for FIR filter", "passthrough": false, "list": ["Bartlett", "Bartlett-Hann", "Blackman", "Blackman-Harris", "Bohman", "Boxcar", "Dolph-Chebyshev", "Flat top", "Gaussian", "Generalized Gaussian", "Hamming", "Hann", "Kaiser", "Nuttall", "Parzen", "Slepian", "Triangular"], "value": [12], "label": "Filter windows", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "filter_param_template": {"description": "Template for required parameters.", "value": "", "label": "Required filter parameters", "editor": null, "type": "string", "order": 0}, "freq_type": {"description": "Frequency pass type", "passthrough": false, "list": ["Lowpass", "Highpass", "Bandpass", "Bandstop"], "value": [0], "label": "Frequency pass type", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "fir_cutoff": {"description": "", "value": "", "label": "", "editor": null, "type": "string", "order": 0}, "iir_wp": {"description": "", "value": "0.7", "label": "", "editor": null, "type": "string", "order": 0}, "iir_gstop": {"description": "", "value": "7", "label": "", "editor": null, "type": "string", "order": 0}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{948070d5-6429-4d29-8e5c-d8075fffb66c}">
+        <label>InputADAFs</label>
+        <description>InputADAFs</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{852e5f39-e71c-4957-8484-4d8545edc572}">
+        <label>OutputADAFs</label>
+        <description>OutputADAFs</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.hjoinadafs" uuid="{afcf0b06-f1a4-48f9-aa6a-89260600a097}" width="50.0" x="1575.0" y="1925.0">
+    <label>HJoin ADAFs</label>
+    <description>HJoin two lists with ADAF files.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(c) 2013 Combine AB</copyright>
+    <version>0.1</version>
+    <parameters type="json"><![CDATA[{"type": "group"}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{a6b2af80-b337-11e2-88bd-a82066005e3c}">
+        <label>None</label>
+        <description>None</description>
+      </input>
+      <input key="port2" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{a6b2adfd-b337-11e2-8d5b-a82066005e3c}">
+        <label>None</label>
+        <description>None</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{a6b2b0de-b337-11e2-9b50-a82066005e3c}">
+        <label>None</label>
+        <description>None</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.list.getitemadaf" uuid="{b02474e8-790d-4eeb-b7d6-4d33eebcb48e}" width="50.0" x="1700.0" y="2575.0">
+    <label>Get Item ADAF</label>
+    <description>Get an item from a list</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "combo": {"description": "List indexes.", "passthrough": false, "list": ["0"], "value": [0], "label": "Index", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 10}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{208c5920-d95d-470f-9686-6c6491c25b75}">
+        <label>List</label>
+        <description>List</description>
+      </input>
+      <output key="port3" requiresdata="False" scheme="hdf5" type="adaf" uuid="{73015e1f-96c4-47e0-9716-a507dd51deff}">
+        <label>Item</label>
+        <description>Item</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.adaf2tables" uuid="{b09c034d-0898-4b33-b8e5-7845512385ac}" width="50.0" x="1450.0" y="2500.0">
+    <label>ADAF2Tables</label>
+    <description>Export of data from an ADAF to a list of Tables.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"export_group": {"description": "Group to export.", "passthrough": false, "list": ["Meta", "Result", "Time series"], "value": [0], "label": "Export group", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="adaf" uuid="{2420b8be-197f-4466-96e2-cfc6f5f869d7}">
+        <label>ADAF</label>
+        <description>ADAF</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[table]" uuid="{5d53e57c-160a-47b6-81bc-fa9b59fd2f5c}">
+        <label>Table</label>
+        <description>Table</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.importadafs" uuid="{bfe14abf-15fb-4128-8f90-fe0fadb27885}" width="50.0" x="1325.0" y="2925.0">
+    <label>ADAFs</label>
+    <description>Import multiple adaf files</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"custom_importer_data": {"ATF": {"measurements": {"description": "The measurements to import.", "passthrough": false, "list": [], "value": [], "label": "Select measurements:", "editor": {"buttons": true, "type": "listview", "selection": "multi", "invertbutton": true}, "value_names": [], "type": "list"}, "type": "group", "timeseries": {"editor": null, "type": "boolean", "description": "Import timeseries.", "value": true, "label": "Import timeseries:"}, "label": ""}, "CM-ERG": {"type": "group", "label": ""}, "Auto": {"type": "group", "order": 0, "label": ""}, "MDF": {"type": "group", "label": "", "default_file": {"editor": {"filter": ["Any files (*)"], "type": "filename"}, "type": "string", "description": "", "value": "", "label": "Default file:"}, "encoding": {"editor": null, "type": "string", "description": "The name of a character encoding as recognized by python.", "value": "latin1", "label": "Character Encoding:"}}, "LAA": {"type": "group", "label": ""}, "DIVA": {"type": "group", "label": ""}, "label": "", "type": "group", "order": 1, "ADAF": {"import_links": {"editor": null, "type": "boolean", "description": "Import with links to source file, this file and any files that it may link to  must not be moved while the flow is opened.", "value": true, "label": "Import with links to source file"}, "type": "group", "label": ""}}, "active_importer": {"description": "", "value": "ADAF", "label": "", "editor": null, "type": "string", "order": 0}, "fail_strategy": {"description": "", "passthrough": false, "list": ["Exception", "Create Empty Entry", "Skip File"], "value": [0], "label": "Action on import failure", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 2}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="bob" requiresdata="True" scheme="text" type="[datasource]" uuid="{754b3fd4-4799-49d1-ad6d-47476114e661}">
+        <label>Datasource</label>
+        <description>Datasource</description>
+      </input>
+      <output key="" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{ed2c0751-b726-4b12-8f1d-7d887b926b1f}">
+        <label>ADAFOutput</label>
+        <description>ADAFOutput</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.importadafs" uuid="{c55687d2-bc4d-4894-b503-8cdddfd2707a}" width="50.0" x="1325.0" y="2725.0">
+    <label>ADAFs</label>
+    <description>Import multiple adaf files</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"custom_importer_data": {"Auto": {"type": "group", "order": 0, "label": ""}, "type": "group", "order": 0, "label": ""}, "active_importer": {"description": "", "type": "string", "order": 0, "value": "Auto", "label": ""}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="bob" requiresdata="True" scheme="text" type="[datasource]" uuid="{75512e92-dc82-447e-9568-b1375e06c947}">
+        <label>Datasource</label>
+        <description>Datasource</description>
+      </input>
+      <output key="Port0" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{5045d2e6-0243-43d0-b271-a5f4f39d94a9}">
+        <label>ADAFOutput</label>
+        <description>ADAFOutput</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.list.getitemadaf" uuid="{c5cd30fc-ed09-468f-ba7d-222fef36f7a1}" width="50.0" x="1575.0" y="2400.0">
+    <label>Get Item ADAF</label>
+    <description>Get an item from a list</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "combo": {"description": "List indexes.", "passthrough": false, "list": ["0"], "value": [0], "label": "Index", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 10}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{180c15bc-1782-4371-8725-3ccc7441c1af}">
+        <label>List</label>
+        <description>List</description>
+      </input>
+      <output key="port3" requiresdata="False" scheme="hdf5" type="adaf" uuid="{f8dba9d0-e10c-4a6c-b346-421ae3a7fd4d}">
+        <label>Item</label>
+        <description>Item</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.adaf2tables" uuid="{c6289ea3-edea-4d0d-9d06-f71d74957df1}" width="50.0" x="1575.0" y="2675.0">
+    <label>ADAF2Tables</label>
+    <description>Export of data from an ADAF to a list of Tables.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"export_group": {"description": "Group to export.", "passthrough": false, "list": ["Meta", "Result", "Time series"], "value": [0], "label": "Export group", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="adaf" uuid="{cca056e3-d2c5-4481-a9bc-a4366b69cabe}">
+        <label>ADAF</label>
+        <description>ADAF</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[table]" uuid="{a2397fd8-9ec7-4253-8466-d2831c5e639e}">
+        <label>Table</label>
+        <description>Table</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.datasources.filedatasourcemultiple" uuid="{c772c8a5-4cfa-49e4-9e4f-d54f543dd0f2}" width="50.0" x="1200.0" y="2725.0">
+    <label>Datasources</label>
+    <description>Select data sources.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"directory": {"description": "The base directory.", "value": "data/", "label": "Directory", "editor": {"type": "dirname"}, "type": "string", "order": 2}, "search_pattern": {"description": "A wildcard/regexp pattern to match files.", "value": "import*", "label": "Search pattern", "editor": null, "type": "string", "order": 3}, "type": "group", "recursive": {"description": "Find files in all subfolders.", "value": false, "label": "Recursive", "editor": null, "type": "boolean", "order": 0}, "use_relative_path": {"description": "Use the relative path to the file.", "value": true, "label": "Use relative path", "editor": null, "type": "boolean", "order": 1}}]]></parameters>
+    <ports>
+      <output key="port1" requiresdata="False" scheme="text" type="[datasource]" uuid="{d2b8a334-9e6c-48b3-8e3f-d567a3977a35}">
+        <label>DataSource</label>
+        <description>DataSource</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.datasources.filedatasource" uuid="{eebca03c-4a9c-4778-af36-bb070b87351b}" width="50.0" x="1200.0" y="3025.0">
+    <label>Datasource</label>
+    <description>Select a data source.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"db_password": {"description": "A valid password for the selected user.", "value": "", "label": "Password", "editor": null, "type": "string", "order": 6}, "filename": {"description": "A filename including path if needed", "value": "data/import_random.h5", "label": "Filename", "editor": {"filter": ["Any files (*)"], "type": "filename"}, "type": "string", "order": 1}, "db_driver": {"description": "Database driver to use.", "passthrough": false, "list": ["SQL Server"], "value": [0], "label": "Database driver", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 2}, "db_connection_string": {"description": "A connection string that will override other settings.", "value": "", "label": "Connection string", "editor": null, "type": "string", "order": 7}, "db_user": {"description": "A valid database user.", "value": "", "label": "User", "editor": null, "type": "string", "order": 5}, "db_databasename": {"description": "The name of the database.", "value": "", "label": "Database name", "editor": null, "type": "string", "order": 4}, "db_servername": {"description": "A valid name to a database server.", "value": "", "label": "Server name", "editor": null, "type": "string", "order": 3}, "use_relative_path": {"description": "Use the relative path to the file.", "value": true, "label": "Use relative path", "editor": null, "type": "boolean", "order": 0}, "type": "group", "datasource_type": {"description": "Type of datasource.", "passthrough": false, "list": ["File", "Database"], "value": [0], "label": "Datasource type", "editor": null, "value_names": [], "type": "list", "order": 8}}]]></parameters>
+    <ports>
+      <output key="port1" requiresdata="False" scheme="text" type="datasource" uuid="{b0635e3d-ef7d-44d9-9340-8d0f5a50f0fb}">
+        <label>DataSource</label>
+        <description>DataSource</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.adaf2table" uuid="{f5aad342-3292-4705-8514-2b3075f483e6}" width="50.0" x="1225.0" y="1625.0">
+    <label>ADAF2Table Meta</label>
+    <description>Export of data from an ADAF to a Table.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "export_group": {"description": "Group to export.", "passthrough": false, "list": ["Meta", "Result", "Time series"], "value": [0], "label": "Export group", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 0}, "tb": {"description": "", "passthrough": false, "list": ["system0/raster0/"], "value": [0], "label": "Time basis raster", "editor": {"filter": true, "type": "listview"}, "value_names": ["system0/raster0/"], "type": "list", "order": 2}, "tb_col_name": {"description": "", "type": "string", "order": 4, "value": "raster0", "label": "Time basis column name"}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="adaf" uuid="{623b0db7-084e-4cff-b192-16a9e8f6e8b4}">
+        <label>ADAF</label>
+        <description>ADAF</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="table" uuid="{8d4f7097-53e1-47b4-9748-24bad7e313f8}">
+        <label>Table</label>
+        <description>Table</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.adafs2tableslist" uuid="{f837a1cd-db0c-49e5-9564-8ce5776cb023}" width="50.0" x="1450.0" y="2800.0">
+    <label>ADAFs2TablesList TS</label>
+    <description>Elementwise export of data from a list of ADAFs to alist of Tables.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"export_group": {"description": "Group to export.", "passthrough": false, "list": ["Meta", "Result", "Time series"], "value": [2], "label": "Export group", "editor": {"type": "combobox"}, "value_names": ["Time series"], "type": "list", "order": 0}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="False" scheme="hdf5" type="[adaf]" uuid="{c8e8089a-243a-4df5-9b0b-364dc36e7662}">
+        <label>ADAF</label>
+        <description>ADAF</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[table]" uuid="{9900502c-d7cb-489c-9157-002dbe01379b}">
+        <label>Table</label>
+        <description>Table</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.datasources.filedatasource" uuid="{fcaece58-a8e8-43d4-9ef7-58008d41bac8}" width="50.0" x="1200.0" y="2400.0">
+    <label>Datasource</label>
+    <description>Select a data source.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"db_password": {"description": "A valid password for the selected user.", "value": "", "label": "Password", "editor": null, "type": "string", "order": 6}, "filename": {"description": "A filename including path if needed", "value": "data/mdf.dat", "label": "Filename", "editor": {"filter": ["Any files (*)"], "type": "filename"}, "type": "string", "order": 1}, "db_driver": {"description": "Database driver to use.", "passthrough": false, "list": ["SQL Server"], "value": [0], "label": "Database driver", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 2}, "db_connection_string": {"description": "A connection string that will override other settings.", "value": "", "label": "Connection string", "editor": null, "type": "string", "order": 7}, "db_user": {"description": "A valid database user.", "value": "", "label": "User", "editor": null, "type": "string", "order": 5}, "db_databasename": {"description": "The name of the database.", "value": "", "label": "Database name", "editor": null, "type": "string", "order": 4}, "db_servername": {"description": "A valid name to a database server.", "value": "", "label": "Server name", "editor": null, "type": "string", "order": 3}, "use_relative_path": {"description": "Use the relative path to the file.", "value": true, "label": "Use relative path", "editor": null, "type": "boolean", "order": 0}, "type": "group", "datasource_type": {"description": "Type of datasource.", "passthrough": false, "list": ["File", "Database"], "value": [0], "label": "Datasource type", "editor": null, "value_names": [], "type": "list", "order": 8}}]]></parameters>
+    <ports>
+      <output key="port1" requiresdata="False" scheme="text" type="datasource" uuid="{1f5a4c3a-d22a-4718-bbdb-d30bdc95c0c1}">
+        <label>DataSource</label>
+        <description>DataSource</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.adaf.importadaf" uuid="{fd0ee5c0-2159-42c0-a19a-8725ce783754}" width="50.0" x="1325.0" y="3025.0">
+    <label>ADAF</label>
+    <description>Data source as ADAF</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"custom_importer_data": {"Auto": {"type": "group", "order": 0, "label": ""}, "type": "group", "order": 1, "label": ""}, "active_importer": {"description": "", "value": "Auto", "label": "", "editor": null, "type": "string", "order": 0}, "fail_strategy": {"description": "", "passthrough": false, "list": ["Exception", "Create Empty Entry"], "value": [0], "label": "Action on import failure", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 2}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="" requiresdata="False" scheme="text" type="datasource" uuid="{89ea216f-964a-4c7d-82ac-045caec1d4f3}">
+        <label>Datasource</label>
+        <description>Datasource</description>
+      </input>
+      <output key="" requiresdata="False" scheme="hdf5" type="adaf" uuid="{ac6bb060-9aa0-4998-a3e1-234c829b64d6}">
+        <label>ADAFOutput</label>
+        <description>ADAFOutput</description>
+      </output>
+    </ports>
+  </node>
+  <connection uuid="{0077f2ed-d2df-4a84-98c8-66d116111f5c}">
+    <source node="{09bd921a-7b8a-400e-a71e-5edf76abb32f}" port="{a6b29428-b337-11e2-81b4-a82066005e3c}"/>
+    <destination node="{120450a2-4567-4a79-95ed-6d5ac53e5e09}" port="{e31fc31f-eae4-4dd7-b7f8-a4720b42c5a8}"/>
+  </connection>
+  <connection uuid="{03a17283-a1a1-49f4-b298-786ff602ae3f}">
+    <source node="{4e73d72c-26e1-4fbe-ba45-1904e483a61f}" port="{a6b2d10f-b337-11e2-8304-a82066005e3c}"/>
+    <destination node="{5fbd407a-6ede-47d7-b660-1bfcc3a24cd1}" port="{287b0bab-cdf7-43d0-baa1-ef1b5da0864e}"/>
+  </connection>
+  <connection uuid="{0d162066-f341-4129-a2dc-19070d679633}">
+    <source node="{c772c8a5-4cfa-49e4-9e4f-d54f543dd0f2}" port="{d2b8a334-9e6c-48b3-8e3f-d567a3977a35}"/>
+    <destination node="{c55687d2-bc4d-4894-b503-8cdddfd2707a}" port="{75512e92-dc82-447e-9568-b1375e06c947}"/>
+  </connection>
+  <connection uuid="{213373dc-699f-4d33-9c70-8fac14aa93be}">
+    <source node="{5fbd407a-6ede-47d7-b660-1bfcc3a24cd1}" port="{725e186b-64aa-474f-b4df-2387ca4dede7}"/>
+    <destination node="{549a2253-4e7b-4919-9786-208117c93110}" port="{ff0f5c3d-138a-49af-b274-aecfc9c35d79}"/>
+  </connection>
+  <connection uuid="{26a39733-20e4-4d97-bbbc-28a14f68c949}">
+    <source node="{0bdfd12b-eb9a-407c-84d0-235c4dc644e2}" port="{ddf9c7a9-6522-4409-b23f-a0cfb19e9118}"/>
+    <destination node="{64ec1280-05b4-4808-893d-e95312646ae4}" port="{69b26c68-e699-40cd-b538-c8e6b3f7307e}"/>
+  </connection>
+  <connection uuid="{27d73eab-911b-4473-9c92-9c9f87492b14}">
+    <source node="{c55687d2-bc4d-4894-b503-8cdddfd2707a}" port="{5045d2e6-0243-43d0-b271-a5f4f39d94a9}"/>
+    <destination node="{f837a1cd-db0c-49e5-9564-8ce5776cb023}" port="{c8e8089a-243a-4df5-9b0b-364dc36e7662}"/>
+  </connection>
+  <connection uuid="{298359b3-bffe-459a-8b2c-42ef9284cc78}">
+    <source node="{c55687d2-bc4d-4894-b503-8cdddfd2707a}" port="{5045d2e6-0243-43d0-b271-a5f4f39d94a9}"/>
+    <destination node="{48fce6ce-08a4-4162-9d4e-77f202e6f690}" port="{cc50f8f4-a5a4-41dc-837b-a125a60628f5}"/>
+  </connection>
+  <connection uuid="{2985ccc6-3add-4041-9195-062afff93383}">
+    <source node="{c772c8a5-4cfa-49e4-9e4f-d54f543dd0f2}" port="{d2b8a334-9e6c-48b3-8e3f-d567a3977a35}"/>
+    <destination node="{bfe14abf-15fb-4128-8f90-fe0fadb27885}" port="{754b3fd4-4799-49d1-ad6d-47476114e661}"/>
+  </connection>
+  <connection uuid="{2afb5ba2-1264-4901-906d-df8a582bafb5}">
+    <source node="{263a6876-fdd9-4c2c-97cc-2e29a30a4146}" port="{746dad14-7303-437a-87f8-8250ab9ae32d}"/>
+    <destination node="{37a6aceb-d281-4fcc-87c9-6f45b9d396a5}" port="{7fe045d9-0892-4e27-a4c8-608ffd46a574}"/>
+  </connection>
+  <connection uuid="{2b147aaf-57ff-47fb-aa48-8716b046afa2}">
+    <source node="{23e6db7f-1182-4f52-b7cc-0e422d73692a}" port="{3facd851-3c7b-49cd-b571-039dab510757}"/>
+    <destination node="{05fd5e28-21c7-4f44-8a5a-69ff2475adcd}" port="{56ec7419-8b41-4259-82c4-c2b4901e278d}"/>
+  </connection>
+  <connection uuid="{34a3acda-3104-4acb-87aa-a9fa547bb6be}">
+    <source node="{6685cd5e-e064-4cd4-9b3d-9ca8392e4bb7}" port="{6addbb32-4319-42bf-ac7e-8088f46d8560}"/>
+    <destination node="{a240e7b2-bf4b-4038-80c3-62dec1717cee}" port="{948070d5-6429-4d29-8e5c-d8075fffb66c}"/>
+  </connection>
+  <connection uuid="{38c4f759-58a1-4033-bfc2-7f21b6275703}">
+    <source node="{106856a0-7a0e-4b17-b425-72d1ffdf1ae4}" port="{97e54938-844b-4153-af27-53ee7699819c}"/>
+    <destination node="{263a6876-fdd9-4c2c-97cc-2e29a30a4146}" port="{a8bc410c-c5e6-440b-a758-1ec2544a8562}"/>
+  </connection>
+  <connection uuid="{3ac21dbc-5890-4252-a272-554f5b845d0a}">
+    <source node="{8078f866-0df1-4211-8e0f-0061f392a7f6}" port="{ba9df037-1bb9-403f-ae51-1075ce529ddf}"/>
+    <destination node="{96f17ad9-6538-46e1-90e0-dd40a2140565}" port="{4b778b9a-3c1b-4416-ad01-7f215abb8b1a}"/>
+  </connection>
+  <connection uuid="{40f2038c-0ce0-4bd2-a3dc-f83b02401612}">
+    <source node="{09bd921a-7b8a-400e-a71e-5edf76abb32f}" port="{a6b29428-b337-11e2-81b4-a82066005e3c}"/>
+    <destination node="{5a46fb60-1fef-4fa0-8a54-4001c1ae7ff8}" port="{30f0be16-47d0-48db-8c6b-124b935ae212}"/>
+  </connection>
+  <connection uuid="{48469c22-a5d6-4e7b-a59f-f83bfb82ed92}">
+    <source node="{23e6db7f-1182-4f52-b7cc-0e422d73692a}" port="{3facd851-3c7b-49cd-b571-039dab510757}"/>
+    <destination node="{9c0ca3ab-26e7-4e4c-b12f-2d12a9106898}" port="{523ae5f5-edcf-49ee-b1dd-d04e9d4206f3}"/>
+  </connection>
+  <connection uuid="{4be9a0e4-083b-417c-b293-96ff595cd5ed}">
+    <source node="{c772c8a5-4cfa-49e4-9e4f-d54f543dd0f2}" port="{d2b8a334-9e6c-48b3-8e3f-d567a3977a35}"/>
+    <destination node="{44564982-903b-4a84-82d7-fab5dc46ad79}" port="{90e3d4d2-2d97-4a91-b4f5-0f397fa47ce0}"/>
+  </connection>
+  <connection uuid="{54aef8e8-e959-498d-a9d9-54ce803daedb}">
+    <source node="{263a6876-fdd9-4c2c-97cc-2e29a30a4146}" port="{746dad14-7303-437a-87f8-8250ab9ae32d}"/>
+    <destination node="{c6289ea3-edea-4d0d-9d06-f71d74957df1}" port="{cca056e3-d2c5-4481-a9bc-a4366b69cabe}"/>
+  </connection>
+  <connection uuid="{583c1a8e-8c51-420e-b5d3-268f6ff684ce}">
+    <source node="{05fd5e28-21c7-4f44-8a5a-69ff2475adcd}" port="{ef3769d7-e0e3-408d-b393-2759f4adf809}"/>
+    <destination node="{1c03438b-87ed-4e74-afa0-1ca40a1c9c83}" port="{85bb77c6-f3ee-407e-ac45-5176992857b6}"/>
+  </connection>
+  <connection uuid="{65cc648b-d60b-45bd-b4a1-4ed1af0f9b64}">
+    <source node="{f5aad342-3292-4705-8514-2b3075f483e6}" port="{8d4f7097-53e1-47b4-9748-24bad7e313f8}"/>
+    <destination node="{6def1ad6-e2ac-4f97-b0bd-6e97f0f8f7f7}" port="{0889867a-39f6-4090-bd41-a4004a4825ed}"/>
+  </connection>
+  <connection uuid="{66dcb577-57e4-42af-b003-cdadc3616be6}">
+    <source node="{09bd921a-7b8a-400e-a71e-5edf76abb32f}" port="{a6b29428-b337-11e2-81b4-a82066005e3c}"/>
+    <destination node="{8078f866-0df1-4211-8e0f-0061f392a7f6}" port="{9bc2c024-aee4-4bb2-973b-06d8c51a28e3}"/>
+  </connection>
+  <connection uuid="{6892bb1e-c7a2-4d5e-bc5c-e1e793a8cabb}">
+    <source node="{eebca03c-4a9c-4778-af36-bb070b87351b}" port="{b0635e3d-ef7d-44d9-9340-8d0f5a50f0fb}"/>
+    <destination node="{058be941-245c-4b1f-b363-21a858dd8da7}" port="{3f2021d1-2c18-4392-9cc1-d70cf0c48986}"/>
+  </connection>
+  <connection uuid="{69ffebd6-a3b7-4860-8bf9-57b1f38f44ce}">
+    <source node="{13d1e9f2-109e-49e9-aeb7-36f221e7620d}" port="{3df216c5-a496-413b-8da8-142746b41057}"/>
+    <destination node="{870418fb-8bf5-4a24-948e-e5c6aa8e5c03}" port="{88702a51-1b0c-46a0-be11-9585a839964b}"/>
+  </connection>
+  <connection uuid="{754efe62-3275-49ea-afd1-b0d9381f2a5e}">
+    <source node="{13d1e9f2-109e-49e9-aeb7-36f221e7620d}" port="{3df216c5-a496-413b-8da8-142746b41057}"/>
+    <destination node="{b09c034d-0898-4b33-b8e5-7845512385ac}" port="{2420b8be-197f-4466-96e2-cfc6f5f869d7}"/>
+  </connection>
+  <connection uuid="{7dc8c797-8db4-42da-961b-724338b7fa73}">
+    <source node="{22b783c8-4c37-4854-be70-cbb811217a80}" port="{694ff6c1-93fd-4d19-bda6-e4d0ae80629c}"/>
+    <destination node="{23e6db7f-1182-4f52-b7cc-0e422d73692a}" port="{ed6de058-403f-41f8-bf7b-b8c3e5cbdf45}"/>
+  </connection>
+  <connection uuid="{8414d5bc-ec50-4597-abb9-0c8e9321d892}">
+    <source node="{0fbd875f-a0b3-4456-b943-1cbba27f9d7f}" port="{c8d8f57b-880c-4162-8702-078b5e21ec13}"/>
+    <destination node="{05fd5e28-21c7-4f44-8a5a-69ff2475adcd}" port="{ed86cb29-de91-478c-834f-69bab9bf9b18}"/>
+  </connection>
+  <connection uuid="{88c7534b-6f60-44b9-959b-ab2204a4634c}">
+    <source node="{870418fb-8bf5-4a24-948e-e5c6aa8e5c03}" port="{55c1e94a-76ba-4ece-9591-e67522852d03}"/>
+    <destination node="{c5cd30fc-ed09-468f-ba7d-222fef36f7a1}" port="{180c15bc-1782-4371-8725-3ccc7441c1af}"/>
+  </connection>
+  <connection uuid="{9ea2f7c4-00f7-4dea-b625-b65436495f48}">
+    <source node="{02daed3e-212e-4ee5-a50d-8e6db5c7ff23}" port="{7e756f6a-91cf-4de2-b587-9cf008a4e9d0}"/>
+    <destination node="{6685cd5e-e064-4cd4-9b3d-9ca8392e4bb7}" port="{573f9011-1294-4783-a766-45950039d8b3}"/>
+  </connection>
+  <connection uuid="{a3a7336c-45f7-4751-9af1-e84ae20e1d38}">
+    <source node="{4e73d72c-26e1-4fbe-ba45-1904e483a61f}" port="{a6b2d10f-b337-11e2-8304-a82066005e3c}"/>
+    <destination node="{0bdfd12b-eb9a-407c-84d0-235c4dc644e2}" port="{58f68133-ec2d-4e12-9c94-19c46d231035}"/>
+  </connection>
+  <connection uuid="{a6b351a8-b337-11e2-86d7-a82066005e3c}">
+    <source node="{4e73d72c-26e1-4fbe-ba45-1904e483a61f}" port="{a6b2d10f-b337-11e2-8304-a82066005e3c}"/>
+    <destination node="{293bba44-c35c-4523-8834-524c712579f7}" port="{a6b30717-b337-11e2-8290-a82066005e3c}"/>
+  </connection>
+  <connection uuid="{ac7bbf3c-b675-4d11-9bfd-cd40a9e8c85c}">
+    <source node="{eebca03c-4a9c-4778-af36-bb070b87351b}" port="{b0635e3d-ef7d-44d9-9340-8d0f5a50f0fb}"/>
+    <destination node="{2b765e5a-bfbd-4c62-bb15-48c1c5b86e33}" port="{0c8279ed-935b-4289-8450-db6445b1dc32}"/>
+  </connection>
+  <connection uuid="{b3757e03-3c1e-4d63-8ce5-8c4942433003}">
+    <source node="{09bd921a-7b8a-400e-a71e-5edf76abb32f}" port="{a6b29428-b337-11e2-81b4-a82066005e3c}"/>
+    <destination node="{7ba75f75-86e7-459e-b871-67e5c44ee228}" port="{2c42a87b-0439-4499-9523-cebb41f82fb4}"/>
+  </connection>
+  <connection uuid="{b450f953-ca0a-461f-a520-a972f4d008f0}">
+    <source node="{96f17ad9-6538-46e1-90e0-dd40a2140565}" port="{12323675-0c96-4857-8e01-ce0f325219f0}"/>
+    <destination node="{afcf0b06-f1a4-48f9-aa6a-89260600a097}" port="{a6b2af80-b337-11e2-88bd-a82066005e3c}"/>
+  </connection>
+  <connection uuid="{bc15d81a-95a4-4b89-88c6-158e56e32c0b}">
+    <source node="{7ba75f75-86e7-459e-b871-67e5c44ee228}" port="{18d4cc5e-4699-4f5f-a790-7ed504d14a85}"/>
+    <destination node="{02daed3e-212e-4ee5-a50d-8e6db5c7ff23}" port="{f475d83f-5331-4f7d-b9c3-de365033e255}"/>
+  </connection>
+  <connection uuid="{c01717f7-0344-4a58-9735-9c461742d3cb}">
+    <source node="{37a6aceb-d281-4fcc-87c9-6f45b9d396a5}" port="{dd5381f4-7263-41d2-af52-082bef39e904}"/>
+    <destination node="{b02474e8-790d-4eeb-b7d6-4d33eebcb48e}" port="{208c5920-d95d-470f-9686-6c6491c25b75}"/>
+  </connection>
+  <connection uuid="{c249712b-c477-4611-9fda-81e48e0da2d6}">
+    <source node="{4e73d72c-26e1-4fbe-ba45-1904e483a61f}" port="{a6b2d10f-b337-11e2-8304-a82066005e3c}"/>
+    <destination node="{f5aad342-3292-4705-8514-2b3075f483e6}" port="{623b0db7-084e-4cff-b192-16a9e8f6e8b4}"/>
+  </connection>
+  <connection uuid="{c837c6bf-7ecb-47c8-b5b2-f2d50a881d3c}">
+    <source node="{4a8cec9c-73e1-481c-8ee9-c1bf5eba8a03}" port="{b11a7946-2045-4ed4-8544-ff1bcacf4618}"/>
+    <destination node="{293bba44-c35c-4523-8834-524c712579f7}" port="{a6b30887-b337-11e2-ba7f-a82066005e3c}"/>
+  </connection>
+  <connection uuid="{c8e4392b-2364-4215-a44b-9ccf6bcd3eaf}">
+    <source node="{09bd921a-7b8a-400e-a71e-5edf76abb32f}" port="{a6b29428-b337-11e2-81b4-a82066005e3c}"/>
+    <destination node="{563a13e5-0bd2-4011-a07d-e4213ad0c10a}" port="{7574410c-fc49-4a48-89ca-18bd78673d32}"/>
+  </connection>
+  <connection uuid="{c9f16c38-c3e5-465c-8fa5-f4e31dbb0b17}">
+    <source node="{4a8cec9c-73e1-481c-8ee9-c1bf5eba8a03}" port="{b11a7946-2045-4ed4-8544-ff1bcacf4618}"/>
+    <destination node="{563a13e5-0bd2-4011-a07d-e4213ad0c10a}" port="{7bebd0d4-905c-48da-8841-6c26394ba9b7}"/>
+  </connection>
+  <connection uuid="{dfd549f2-07ac-4aef-b0ea-28cc10257180}">
+    <source node="{206947e0-761d-49a3-a1b5-ddcaefcdd10f}" port="{44c7ac00-ae3c-4010-8ab2-de0443c9f75c}"/>
+    <destination node="{18823e78-7404-482f-9d26-5f77e1d3727d}" port="{00126da0-6965-446b-80e0-c3316fad3761}"/>
+  </connection>
+  <connection uuid="{e0747a1b-9ab0-4771-a5fd-58f58106dd0a}">
+    <source node="{09bd921a-7b8a-400e-a71e-5edf76abb32f}" port="{a6b29428-b337-11e2-81b4-a82066005e3c}"/>
+    <destination node="{0fbd875f-a0b3-4456-b943-1cbba27f9d7f}" port="{74fd739d-ea59-4391-8932-52236a201b8e}"/>
+  </connection>
+  <connection uuid="{eb06644d-1ee4-4c12-8ee8-3f31128a6a0e}">
+    <source node="{09bd921a-7b8a-400e-a71e-5edf76abb32f}" port="{a6b29428-b337-11e2-81b4-a82066005e3c}"/>
+    <destination node="{206947e0-761d-49a3-a1b5-ddcaefcdd10f}" port="{09861fb7-38c8-45f2-a2c3-0c2cad80a45b}"/>
+  </connection>
+  <connection uuid="{ed1e684d-50bf-4f76-ba3b-e3e2bfa66413}">
+    <source node="{fcaece58-a8e8-43d4-9ef7-58008d41bac8}" port="{1f5a4c3a-d22a-4718-bbdb-d30bdc95c0c1}"/>
+    <destination node="{13d1e9f2-109e-49e9-aeb7-36f221e7620d}" port="{706a30b5-5f9d-4601-a325-6afd5410d158}"/>
+  </connection>
+  <connection uuid="{f3e0707c-6f59-460e-b88f-8fe11871b744}">
+    <source node="{c55687d2-bc4d-4894-b503-8cdddfd2707a}" port="{5045d2e6-0243-43d0-b271-a5f4f39d94a9}"/>
+    <destination node="{09f6bfd9-e973-4f68-9d9e-41ed84ea17af}" port="{8d174ca9-8e1d-4e25-8b1e-00c89598a821}"/>
+  </connection>
+  <connection uuid="{f7762ec9-fa4b-49a3-ac31-9d3500b49184}">
+    <source node="{eebca03c-4a9c-4778-af36-bb070b87351b}" port="{b0635e3d-ef7d-44d9-9340-8d0f5a50f0fb}"/>
+    <destination node="{fd0ee5c0-2159-42c0-a19a-8725ce783754}" port="{89ea216f-964a-4c7d-82ac-045caec1d4f3}"/>
+  </connection>
+  <connection uuid="{ff5822a7-5d5b-4eaf-80d1-d43baee1ff73}">
+    <source node="{18823e78-7404-482f-9d26-5f77e1d3727d}" port="{a4a01748-4efa-47bc-a954-22f3ca3ff048}"/>
+    <destination node="{afcf0b06-f1a4-48f9-aa6a-89260600a097}" port="{a6b2adfd-b337-11e2-8d5b-a82066005e3c}"/>
+  </connection>
+</flow>

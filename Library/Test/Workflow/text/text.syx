@@ -1,0 +1,510 @@
+<?xml version='1.0' encoding='ASCII'?>
+<flow xmlns="http://www.sysess.org/sympathyfordata/workflow/1.0" cls="Flow" height="50.0" id="" is_locked="False" uuid="{a1e49bbd-f915-4662-a4ee-ec0c54fc88ac}" width="50.0" x="0.0" y="0.0">
+  <label>text</label>
+  <description></description>
+  <author>Unknown</author>
+  <copyright></copyright>
+  <version>1.0</version>
+  <source></source>
+  <aggregation type="json"><![CDATA[null]]></aggregation>
+  <libraries type="json"><![CDATA[[]]]></libraries>
+  <pythonpaths type="json"><![CDATA[[]]]></pythonpaths>
+  <environment type="json"><![CDATA[{}]]></environment>
+  <parameters type="json"><![CDATA[{"environment": {}}]]></parameters>
+  <ports/>
+  <flow cls="Lambda" height="50.0" id="" is_locked="False" uuid="{638b3012-5210-4cfd-a91c-fda0b2eb722b}" width="50.0" x="2175.0" y="1825.0">
+    <label>New Lambda 0</label>
+    <description></description>
+    <author>Unknown</author>
+    <copyright></copyright>
+    <version>1.0</version>
+    <source></source>
+    <aggregation type="json"><![CDATA[null]]></aggregation>
+    <libraries type="json"><![CDATA[[]]]></libraries>
+    <pythonpaths type="json"><![CDATA[[]]]></pythonpaths>
+    <environment type="json"><![CDATA[{}]]></environment>
+    <parameters type="json"><![CDATA[{"environment": {}}]]></parameters>
+    <ports>
+      <input height="50.0" index="0" key="Port" optional="False" requiresdata="False" scheme="hdf5" type="(table, table)" uuid="{7c199a46-f416-422e-834f-739556c789e1}" width="50.0" x="1800.0" y="2000.0">
+        <label>Port</label>
+        <description>Port</description>
+      </input>
+      <output height="50.0" index="0" key="Port" optional="False" requiresdata="False" scheme="hdf5" type="table" uuid="{aa4aac4c-361b-4503-aaf4-69b1e9a1366d}" width="50.0" x="2125.0" y="2000.0">
+        <label>Port</label>
+        <description>Port</description>
+      </output>
+    </ports>
+    <basic_ports>
+      <output key="Function" requiresdata="False" scheme="hdf5" type="(table, table) -&gt; table" uuid="{00d9b162-4426-49be-b9e8-7270fcee120c}">
+        <label>Lambda function</label>
+        <description>Lambda function</description>
+      </output>
+    </basic_ports>
+    <node height="50.0" id="org.sysess.sympathy.data.table.assertequaltable" uuid="{1e90ac3e-be64-4715-a018-0fc9a91e2445}" width="50.0" x="2025.0" y="2000.0">
+      <label>Assert Equal Table</label>
+      <description></description>
+      <author>Magnus Sand&#233;n &lt;magnus.sanden@combine.se&gt;</author>
+      <copyright>Copyright (c) 2016 System Engineering Software Society</copyright>
+      <version>1.0</version>
+      <parameters type="json"><![CDATA[{"type": "group", "col_order": {"description": "", "editor": null, "label": "Compare column order", "order": 0, "type": "boolean", "value": true}, "col_attrs": {"description": "", "editor": null, "label": "Compare column attributes", "order": 1, "type": "boolean", "value": true}, "tbl_names": {"description": "", "editor": null, "label": "Compare table names", "order": 2, "type": "boolean", "value": true}, "tbl_attrs": {"description": "", "editor": null, "label": "Compare table attributes", "order": 3, "type": "boolean", "value": true}}]]></parameters>
+      <ports>
+        <input key="table1" requiresdata="False" scheme="hdf5" type="table" uuid="{37089fe6-1fd3-4377-8cc4-5cfb8e4d20df}">
+          <label>Table A</label>
+          <description>Table A</description>
+        </input>
+        <input key="table2" requiresdata="False" scheme="hdf5" type="table" uuid="{ede270dd-cddd-46dd-b7fe-2b2a954ef068}">
+          <label>Table B</label>
+          <description>Table B</description>
+        </input>
+        <output key="out" requiresdata="False" scheme="hdf5" type="table" uuid="{b6c0be1b-03ee-4e44-8c5f-92df3b8c7bc8}">
+          <label>Output Table</label>
+          <description>Output Table</description>
+        </output>
+      </ports>
+    </node>
+    <node height="50.0" id="org.sysess.sympathy.tuple.untuple2" uuid="{3298c7c7-1022-4839-93d1-d4135a9bef01}" width="50.0" x="1900.0" y="2000.0">
+      <label>Untuple2</label>
+      <description></description>
+      <author>Erik der Hagopian &lt;erik.hagopian@sysess.org&gt;</author>
+      <copyright>(C) 2016 System Engineering Software Society</copyright>
+      <version>1.0</version>
+      <parameters type="json"><![CDATA[{"type": "group"}]]></parameters>
+      <ports>
+        <input key="" requiresdata="False" scheme="hdf5" type="(table, table)" uuid="{2f7a7a40-c9eb-41f2-8b6a-d6d16c1d8b30}">
+          <label>Tuple2</label>
+          <description>Tuple2</description>
+        </input>
+        <output key="" requiresdata="False" scheme="hdf5" type="table" uuid="{6897ffe1-b886-4011-bab2-05b927b0b0a2}">
+          <label>First</label>
+          <description>First</description>
+        </output>
+        <output key="" requiresdata="False" scheme="hdf5" type="table" uuid="{aca48796-ee6b-4c03-bdcd-64deca554992}">
+          <label>Second</label>
+          <description>Second</description>
+        </output>
+      </ports>
+    </node>
+    <connection type="(table, table)" uuid="{3dc79ac4-347c-499c-8fa0-7d4bccd76b3d}">
+      <source node="{638b3012-5210-4cfd-a91c-fda0b2eb722b}" port="{7c199a46-f416-422e-834f-739556c789e1}"/>
+      <destination node="{3298c7c7-1022-4839-93d1-d4135a9bef01}" port="{2f7a7a40-c9eb-41f2-8b6a-d6d16c1d8b30}"/>
+    </connection>
+    <connection type="table" uuid="{430ea191-a9a1-48b2-b0bf-ba3f72adcac9}">
+      <source node="{1e90ac3e-be64-4715-a018-0fc9a91e2445}" port="{b6c0be1b-03ee-4e44-8c5f-92df3b8c7bc8}"/>
+      <destination node="{638b3012-5210-4cfd-a91c-fda0b2eb722b}" port="{aa4aac4c-361b-4503-aaf4-69b1e9a1366d}"/>
+    </connection>
+    <connection type="table" uuid="{50816171-5022-439c-b654-e856a7b9c806}">
+      <source node="{3298c7c7-1022-4839-93d1-d4135a9bef01}" port="{6897ffe1-b886-4011-bab2-05b927b0b0a2}"/>
+      <destination node="{1e90ac3e-be64-4715-a018-0fc9a91e2445}" port="{37089fe6-1fd3-4377-8cc4-5cfb8e4d20df}"/>
+    </connection>
+    <connection type="table" uuid="{fb373675-b096-407b-8a86-aa7083a99dc0}">
+      <source node="{3298c7c7-1022-4839-93d1-d4135a9bef01}" port="{aca48796-ee6b-4c03-bdcd-64deca554992}"/>
+      <destination node="{1e90ac3e-be64-4715-a018-0fc9a91e2445}" port="{ede270dd-cddd-46dd-b7fe-2b2a954ef068}"/>
+    </connection>
+  </flow>
+  <node height="50.0" id="org.sysess.sympathy.list.itemtolist" uuid="{02338f3c-27c5-4768-a307-ec6723cee9e3}" width="50.0" x="1750.0" y="1925.0">
+    <label>Item to List</label>
+    <description></description>
+    <author>Erik der Hagopian &lt;erik.hagopian@sysess.org&gt;</author>
+    <copyright>(C) 2015 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group"}]]></parameters>
+    <ports>
+      <input key="item" requiresdata="False" scheme="hdf5" type="table" uuid="{e75e86d0-1201-4606-acde-9d7ea7b5e48c}">
+        <label>Input Item</label>
+        <description>Input Item</description>
+      </input>
+      <output key="list" requiresdata="False" scheme="hdf5" type="[table]" uuid="{bafc0680-331d-4ce4-bab1-693c370a6055}">
+        <label>Item as List</label>
+        <description>Item as List</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.create.createtable" uuid="{0ab8af5b-21f6-4735-9b2b-c2f3f05fca37}" width="50.0" x="1625.0" y="1850.0">
+    <label>Manually Create Table</label>
+    <description></description>
+    <author>Magnus Sand&#233;n &lt;magnus.sanden@combine.se&gt;</author>
+    <copyright>(c) 2016 Combine AB</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "json_table": {"description": "", "editor": null, "label": "", "order": 0, "type": "string", "value": "[[\"Text\", \"U\", [\"test\"]]]"}}]]></parameters>
+    <ports>
+      <output key="port0" requiresdata="False" scheme="hdf5" type="table" uuid="{082148e7-b13b-47a9-bb39-57a784dec2f7}">
+        <label>Manually created table</label>
+        <description>Manually created table</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.export.exportexts" uuid="{169e2aa4-e14d-4911-ba85-18ffd918ba13}" width="50.0" x="1875.0" y="2225.0">
+    <label>Export Texts</label>
+    <description>Export Texts</description>
+    <author>Erik der Hagopian &lt;erik.hagopian@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>0.1</version>
+    <parameters type="json"><![CDATA[{"type": "group", "active_exporter": {"description": "", "editor": null, "label": "", "order": 0, "type": "string", "value": "Text"}, "custom_exporter_data": {"label": "", "order": 1, "type": "group", "Text": {"label": "", "type": "group", "filename_extension": {"description": "", "editor": null, "label": "Filename extension", "type": "string", "value": "txt"}}}, "directory": {"description": "Select the directory where to export the files.", "label": "Output directory", "order": 2, "type": "string", "value": ".", "editor": {"type": "dirname"}}, "filename": {"description": "Filename without extension.", "editor": null, "label": "Filename", "order": 3, "type": "string", "value": "output"}}]]></parameters>
+    <ports>
+      <input key="port0" requiresdata="False" scheme="hdf5" type="[text]" uuid="{8686a841-d52f-4439-8557-e1687560afab}">
+        <label>Texts to be exported</label>
+        <description>Texts to be exported</description>
+      </input>
+      <output key="port0" requiresdata="False" scheme="text" type="[datasource]" uuid="{46734d8a-9e00-4d84-99b8-da9b55de4b47}">
+        <label>Datasources of exported files</label>
+        <description>Datasources of exported files</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.tuple.ziptuple2" uuid="{2aec3c8b-c43d-4d47-bf4f-4c9af012278c}" width="50.0" x="2125.0" y="1925.0">
+    <label>Zip Tuple2</label>
+    <description></description>
+    <author>Erik der Hagopian &lt;erik.hagopian@sysess.org&gt;</author>
+    <copyright>(C) 2016 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group"}]]></parameters>
+    <ports>
+      <input key="" requiresdata="False" scheme="hdf5" type="[table]" uuid="{cac20683-1e7b-44a0-90a8-c6a3999d94bf}">
+        <label>First List</label>
+        <description>First List</description>
+      </input>
+      <input key="" requiresdata="False" scheme="hdf5" type="[table]" uuid="{6794ec6d-887a-4843-a86f-07d9f785f78a}">
+        <label>Second List</label>
+        <description>Second List</description>
+      </input>
+      <output key="" requiresdata="False" scheme="hdf5" type="[(table, table)]" uuid="{2b8fe31e-7b5c-4a79-863f-2d1e16328ada}">
+        <label>Tuple2 List</label>
+        <description>Tuple2 List</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.text.text2table" uuid="{48099d23-a9bd-4209-a8af-859f2d786ba5}" width="50.0" x="1875.0" y="2025.0">
+    <label>Text to Table</label>
+    <description>Convert Text of Table.</description>
+    <author>Erik der Hagopian &lt;erik.hagopian@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>0.1</version>
+    <parameters type="json"><![CDATA[{"type": "group", "name": {"description": "Specify name for output column. Must be a legal name.", "editor": null, "label": "Output name", "order": 0, "type": "string", "value": "Text"}}]]></parameters>
+    <ports>
+      <input key="text" requiresdata="False" scheme="hdf5" type="text" uuid="{c3e5b44c-f9a9-4601-a34e-5e4458357ac0}">
+        <label>Input Text</label>
+        <description>Input Text</description>
+      </input>
+      <output key="table" requiresdata="False" scheme="hdf5" type="table" uuid="{f9afec5b-dfc2-4c60-92ca-985951468da0}">
+        <label>Table with input Text</label>
+        <description>Table with input Text</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.create.createtable" uuid="{4df986df-1eaa-422d-b79f-44c903b42a11}" width="50.0" x="1625.0" y="1925.0">
+    <label>Manually Create Table</label>
+    <description></description>
+    <author>Magnus Sand&#233;n &lt;magnus.sanden@combine.se&gt;</author>
+    <copyright>(c) 2016 Combine AB</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "json_table": {"description": "", "editor": null, "label": "", "order": 0, "type": "string", "value": "[[\"Text\", \"U\", [\"test\"]]]"}}]]></parameters>
+    <ports>
+      <output key="port0" requiresdata="False" scheme="hdf5" type="table" uuid="{641c2ec3-17e7-42a9-92dd-09a8c8e799d5}">
+        <label>Manually created table</label>
+        <description>Manually created table</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.list.appendlist" uuid="{627fa892-8dcb-45b9-a627-e7a41c05a117}" width="50.0" x="1875.0" y="1875.0">
+    <label>Append List</label>
+    <description></description>
+    <author>Erik der Hagopian &lt;erik.hagopian@sysess.org&gt;</author>
+    <copyright>(C) 2015 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group"}]]></parameters>
+    <ports>
+      <input key="item" requiresdata="False" scheme="hdf5" type="table" uuid="{b9388718-f058-4199-bd4d-eb5a154bd40d}">
+        <label>The Item to be appended</label>
+        <description>The Item to be appended</description>
+      </input>
+      <input key="list" requiresdata="False" scheme="hdf5" type="[table]" uuid="{bfbbaa98-b96c-4bb9-9f38-e23e2ca7edec}">
+        <label>Appended List</label>
+        <description>Appended List</description>
+      </input>
+      <output key="list" requiresdata="False" scheme="hdf5" type="[table]" uuid="{11decc80-098a-4e65-bef3-642ef51a9349}">
+        <label>Appended List</label>
+        <description>Appended List</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.text.texts2tables" uuid="{64100d60-7110-45d3-8d29-5c291b5a802c}" width="50.0" x="1875.0" y="2125.0">
+    <label>Texts to Tables</label>
+    <description>Convert Texts of Tables.</description>
+    <author>Erik der Hagopian &lt;erik.hagopian@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>0.1</version>
+    <parameters type="json"><![CDATA[{"type": "group", "name": {"description": "Specify name for output column. Must be a legal name.", "editor": null, "label": "Output name", "order": 0, "type": "string", "value": "Text"}}]]></parameters>
+    <ports>
+      <input key="texts" requiresdata="False" scheme="hdf5" type="[text]" uuid="{48651e94-c859-4c94-904b-39d1ca8d2e2b}">
+        <label>Input Texts</label>
+        <description>Input Texts</description>
+      </input>
+      <output key="tables" requiresdata="False" scheme="hdf5" type="[table]" uuid="{4338f618-d65e-4d85-a304-c138e924648a}">
+        <label>Tables with input Texts</label>
+        <description>Tables with input Texts</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.table.importtablemultiple" uuid="{683978e7-5ed6-4f32-8a94-005acfb2139e}" width="50.0" x="1975.0" y="2225.0">
+    <label>Tables</label>
+    <description>Import datasources as Tables.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "active_importer": {"description": "", "editor": null, "label": "", "order": 0, "type": "string", "value": "Auto"}, "custom_importer_data": {"label": "", "order": 1, "type": "group", "Auto": {"label": "", "order": 0, "type": "group"}}, "fail_strategy": {"description": "", "label": "Action on import failure", "order": 2, "passthrough": false, "type": "list", "list": ["Exception", "Create Empty Entry", "Skip File"], "value": [0], "value_names": [], "editor": {"type": "combobox"}}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="True" scheme="text" type="[datasource]" uuid="{f68ad13f-7c89-4204-9320-76a528f8183e}">
+        <label>Datasource</label>
+        <description>Datasource</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[table]" uuid="{3a21e8e6-65eb-455b-a2cf-fb1a45de5cba}">
+        <label>Imported Tables</label>
+        <description>Imported Tables</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.text.importtext" uuid="{7ecf8292-9faa-43ad-a82d-c2d877f89a1d}" width="50.0" x="1750.0" y="2025.0">
+    <label>Text</label>
+    <description>Data source as text</description>
+    <author>Erik der Hagopian &lt;erik.hagopian@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "active_importer": {"description": "", "editor": null, "label": "", "order": 0, "type": "string", "value": "Auto"}, "custom_importer_data": {"label": "", "order": 1, "type": "group", "Auto": {"label": "", "order": 0, "type": "group"}, "Text": {"label": "", "type": "group"}}, "fail_strategy": {"description": "", "label": "Action on import failure", "order": 2, "passthrough": false, "type": "list", "list": ["Exception", "Create Empty Entry"], "value": [0], "value_names": [], "editor": {"type": "combobox"}}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="True" scheme="text" type="datasource" uuid="{c8da6c97-f236-45d1-b14b-6e1be669770a}">
+        <label>Datasource</label>
+        <description>Datasource</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="text" uuid="{8f9757e0-954a-496e-8561-da3717ab8597}">
+        <label>Imported Text</label>
+        <description>Imported Text</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.datasources.filedatasourcemultiple" uuid="{a5997848-b7e5-475e-a703-950fd72dbc43}" width="50.0" x="1625.0" y="2125.0">
+    <label>Datasources</label>
+    <description>Select data sources.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.1</version>
+    <parameters type="json"><![CDATA[{"type": "group", "recursive": {"description": "Find files in all subfolders.", "editor": null, "label": "Recursive", "order": 0, "type": "boolean", "value": false}, "directory": {"description": "The base directory.", "label": "Directory", "order": 1, "type": "string", "value": "", "editor": {"type": "dirname"}}, "search_pattern": {"description": "A wildcard/regexp pattern to match files.", "editor": null, "label": "Search pattern", "order": 2, "type": "string", "value": "input.txt"}}]]></parameters>
+    <ports>
+      <output key="port1" requiresdata="False" scheme="text" type="[datasource]" uuid="{051a5ab2-4401-4812-bd04-3dc2969b613b}">
+        <label>DataSource</label>
+        <description>DataSource</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.datasources.filedatasource" uuid="{a67abe5d-72a1-4ffc-957e-24ce48c5d579}" width="50.0" x="1625.0" y="2025.0">
+    <label>Datasource</label>
+    <description>Select a data source.</description>
+    <author>Alexander Busck &lt;alexander.busck@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.1</version>
+    <parameters type="json"><![CDATA[{"type": "group", "filename": {"description": "A filename including path if needed", "label": "Filename", "order": 0, "type": "string", "value": "input.txt", "editor": {"type": "filename", "filter": ["Any files (*)"]}}, "db_driver": {"description": "Database driver to use.", "label": "Database driver", "order": 1, "passthrough": false, "type": "list", "list": ["SQL Server"], "value": [0], "value_names": [], "editor": {"type": "combobox"}}, "db_servername": {"description": "A valid name to a database server.", "editor": null, "label": "Server name", "order": 2, "type": "string", "value": ""}, "db_databasename": {"description": "The name of the database.", "editor": null, "label": "Database name", "order": 3, "type": "string", "value": ""}, "db_user": {"description": "A valid database user.", "editor": null, "label": "User", "order": 4, "type": "string", "value": ""}, "db_password": {"description": "A valid password for the selected user.", "editor": null, "label": "Password", "order": 5, "type": "string", "value": ""}, "db_connection_string": {"description": "A connection string that will override other settings.", "editor": null, "label": "Connection string", "order": 6, "type": "string", "value": ""}, "datasource_type": {"description": "Type of datasource.", "editor": null, "label": "Datasource type", "order": 7, "passthrough": false, "type": "list", "list": ["File", "Database"], "value": [0], "value_names": []}}]]></parameters>
+    <ports>
+      <output key="port1" requiresdata="False" scheme="text" type="datasource" uuid="{cf8fc019-c409-49eb-8868-f772e75831e3}">
+        <label>Datasource</label>
+        <description>Datasource</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.list.getitemlist" uuid="{c47301bb-e8e9-46d5-bff5-0bdfb581717e}" width="50.0" x="2200.0" y="2225.0">
+    <label>Get Item List</label>
+    <description></description>
+    <author>Erik der Hagopian &lt;erik.hagopian@sysess.org&gt;</author>
+    <copyright>(C) 2015 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "index": {"description": "Choose item index in list.", "label": "Index", "order": 0, "passthrough": false, "type": "list", "list": ["0"], "value": [0], "value_names": [], "editor": {"type": "combobox"}}}]]></parameters>
+    <ports>
+      <input key="list" requiresdata="False" scheme="hdf5" type="[table]" uuid="{a8da531e-7c28-4b9d-a94d-f15ef1f7763b}">
+        <label>Input List</label>
+        <description>Input List</description>
+      </input>
+      <output key="item" requiresdata="False" scheme="hdf5" type="table" uuid="{417c864c-01ac-44fb-99cc-7bb1b881a5bd}">
+        <label>Output selcted Item from List</label>
+        <description>Output selcted Item from List</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.builtin.map" uuid="{dfd64fbe-4eec-4527-8086-f84aa3186757}" width="50.0" x="2300.0" y="1975.0">
+    <label>Map</label>
+    <description>Map Lambda function over List</description>
+    <author>SysESS</author>
+    <copyright>See about dialog</copyright>
+    <version>See about dialog</version>
+    <parameters type="json"><![CDATA[{"type": "group"}]]></parameters>
+    <ports>
+      <input key="Function" requiresdata="False" scheme="hdf5" type="(table, table) -&gt; table" uuid="{3fdd198d-1cdd-48de-b105-e5763c05f103}">
+        <label>Lambda Function to Map</label>
+        <description>Lambda Function to Map</description>
+      </input>
+      <input key="List" requiresdata="False" scheme="hdf5" type="[(table, table)]" uuid="{d89b4004-e6d1-41c1-877a-78abd39d4f04}">
+        <label>Argument List</label>
+        <description>Argument List</description>
+      </input>
+      <output key="List" requiresdata="False" scheme="hdf5" type="[table]" uuid="{8b14983a-9012-4d8c-9324-5eb2eef14a00}">
+        <label>Output List</label>
+        <description>Output List</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.table.renametablecolumns" uuid="{eab8089f-4256-42ee-805a-8cf1612afcab}" width="50.0" x="2075.0" y="2225.0">
+    <label>Rename columns in Tables</label>
+    <description>Rename the Table columns by using regular expressions.</description>
+    <author>Greger Cronquist &lt;greger.cronquist@sysess.org&gt;</author>
+    <copyright>(c) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "src_expr": {"description": "Specify the regular expression which will be replaced", "editor": null, "label": "Search expression", "order": 0, "type": "string", "value": "X0"}, "dst_expr": {"description": "Specify the regular expression for replacement", "editor": null, "label": "Replacement expression", "order": 1, "type": "string", "value": "Text"}}]]></parameters>
+    <ports>
+      <input key="Input" requiresdata="False" scheme="hdf5" type="[table]" uuid="{5f8c9d58-a711-48e5-8851-e8d8a7366d46}">
+        <label>Input</label>
+        <description>Input</description>
+      </input>
+      <output key="Output" requiresdata="False" scheme="hdf5" type="[table]" uuid="{c239425e-45ac-4a17-81cc-77b53b9c793d}">
+        <label>Output</label>
+        <description>Output</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.list.appendlist" uuid="{f86a164f-ce21-4170-ae7d-a6c2de28c74a}" width="50.0" x="2000.0" y="2075.0">
+    <label>Append List</label>
+    <description></description>
+    <author>Erik der Hagopian &lt;erik.hagopian@sysess.org&gt;</author>
+    <copyright>(C) 2015 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group"}]]></parameters>
+    <ports>
+      <input key="item" requiresdata="False" scheme="hdf5" type="table" uuid="{a3e10fa7-a84b-4ddc-8794-d8d67bc1328f}">
+        <label>The Item to be appended</label>
+        <description>The Item to be appended</description>
+      </input>
+      <input key="list" requiresdata="False" scheme="hdf5" type="[table]" uuid="{81142c69-3c32-4a9b-8bc0-db0030688616}">
+        <label>Appended List</label>
+        <description>Appended List</description>
+      </input>
+      <output key="list" requiresdata="False" scheme="hdf5" type="[table]" uuid="{709c2860-8797-4f24-ad79-dfc5d000c335}">
+        <label>Appended List</label>
+        <description>Appended List</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.table.assertequaltable" uuid="{fc91a387-9e5e-447a-a079-0700cb3e0a8e}" width="50.0" x="2300.0" y="2175.0">
+    <label>Assert Equal Table</label>
+    <description></description>
+    <author>Magnus Sand&#233;n &lt;magnus.sanden@combine.se&gt;</author>
+    <copyright>Copyright (c) 2016 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "col_order": {"description": "", "editor": null, "label": "Compare column order", "order": 0, "type": "boolean", "value": true}, "col_attrs": {"description": "", "editor": null, "label": "Compare column attributes", "order": 1, "type": "boolean", "value": true}, "tbl_names": {"description": "", "editor": null, "label": "Compare table names", "order": 2, "type": "boolean", "value": false}, "tbl_attrs": {"description": "", "editor": null, "label": "Compare table attributes", "order": 3, "type": "boolean", "value": true}}]]></parameters>
+    <ports>
+      <input key="table1" requiresdata="False" scheme="hdf5" type="table" uuid="{cce3d249-28c7-4275-8642-98070ba62551}">
+        <label>Table A</label>
+        <description>Table A</description>
+      </input>
+      <input key="table2" requiresdata="False" scheme="hdf5" type="table" uuid="{8400ae5e-1ca3-4d32-b5a0-cd67cb96edeb}">
+        <label>Table B</label>
+        <description>Table B</description>
+      </input>
+      <output key="out" requiresdata="False" scheme="hdf5" type="table" uuid="{2b510f98-11c7-4b97-89c7-0a44f04602a0}">
+        <label>Output Table</label>
+        <description>Output Table</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.data.text.importtexts" uuid="{fe563915-9fed-4c24-beb8-8944bf1ca847}" width="50.0" x="1750.0" y="2125.0">
+    <label>Texts</label>
+    <description>Data source as Texts</description>
+    <author>Erik der Hagopian &lt;erik.hagopian@sysess.org&gt;</author>
+    <copyright>(C) 2013 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "active_importer": {"description": "", "editor": null, "label": "", "order": 0, "type": "string", "value": "Auto"}, "custom_importer_data": {"label": "", "order": 1, "type": "group", "Auto": {"label": "", "order": 0, "type": "group"}}, "fail_strategy": {"description": "", "label": "Action on import failure", "order": 2, "passthrough": false, "type": "list", "list": ["Exception", "Create Empty Entry", "Skip File"], "value": [0], "value_names": [], "editor": {"type": "combobox"}}}]]></parameters>
+    <ports>
+      <input key="port1" requiresdata="True" scheme="text" type="[datasource]" uuid="{93f3c047-a983-4a22-895b-f871eaaf7bf8}">
+        <label>Datasource</label>
+        <description>Datasource</description>
+      </input>
+      <output key="port1" requiresdata="False" scheme="hdf5" type="[text]" uuid="{65bdcc07-db22-45ec-b54c-02b4dd2078f4}">
+        <label>Imported Texts</label>
+        <description>Imported Texts</description>
+      </output>
+    </ports>
+  </node>
+  <connection type="[(table, table)]" uuid="{024e60e0-e9c4-4f8d-913e-5a540819b252}">
+    <source node="{2aec3c8b-c43d-4d47-bf4f-4c9af012278c}" port="{2b8fe31e-7b5c-4a79-863f-2d1e16328ada}"/>
+    <destination node="{dfd64fbe-4eec-4527-8086-f84aa3186757}" port="{d89b4004-e6d1-41c1-877a-78abd39d4f04}"/>
+  </connection>
+  <connection type="table" uuid="{190d47f5-b016-4c30-b48f-68c7ff312974}">
+    <source node="{0ab8af5b-21f6-4735-9b2b-c2f3f05fca37}" port="{082148e7-b13b-47a9-bb39-57a784dec2f7}"/>
+    <destination node="{627fa892-8dcb-45b9-a627-e7a41c05a117}" port="{b9388718-f058-4199-bd4d-eb5a154bd40d}"/>
+  </connection>
+  <connection type="datasource" uuid="{1b500706-2aed-4f73-aae9-2c0eea2d41bf}">
+    <source node="{a67abe5d-72a1-4ffc-957e-24ce48c5d579}" port="{cf8fc019-c409-49eb-8868-f772e75831e3}"/>
+    <destination node="{7ecf8292-9faa-43ad-a82d-c2d877f89a1d}" port="{c8da6c97-f236-45d1-b14b-6e1be669770a}"/>
+  </connection>
+  <connection type="[datasource]" uuid="{2e5334a7-9b7f-4651-b685-9e89067a4072}">
+    <source node="{a5997848-b7e5-475e-a703-950fd72dbc43}" port="{051a5ab2-4401-4812-bd04-3dc2969b613b}"/>
+    <destination node="{fe563915-9fed-4c24-beb8-8944bf1ca847}" port="{93f3c047-a983-4a22-895b-f871eaaf7bf8}"/>
+  </connection>
+  <connection type="[table]" uuid="{36ba5ccb-3c31-4ab2-b23c-0035be6ef0b1}">
+    <source node="{f86a164f-ce21-4170-ae7d-a6c2de28c74a}" port="{709c2860-8797-4f24-ad79-dfc5d000c335}"/>
+    <destination node="{2aec3c8b-c43d-4d47-bf4f-4c9af012278c}" port="{6794ec6d-887a-4843-a86f-07d9f785f78a}"/>
+  </connection>
+  <connection type="table" uuid="{4a0a8722-abb1-49a7-b196-541415f5a162}">
+    <source node="{c47301bb-e8e9-46d5-bff5-0bdfb581717e}" port="{417c864c-01ac-44fb-99cc-7bb1b881a5bd}"/>
+    <destination node="{fc91a387-9e5e-447a-a079-0700cb3e0a8e}" port="{8400ae5e-1ca3-4d32-b5a0-cd67cb96edeb}"/>
+  </connection>
+  <connection type="(table, table) -&gt; table" uuid="{4d8d5c04-145e-4b87-acd6-b8d5e47a97a3}">
+    <source node="{638b3012-5210-4cfd-a91c-fda0b2eb722b}" port="{00d9b162-4426-49be-b9e8-7270fcee120c}"/>
+    <destination node="{dfd64fbe-4eec-4527-8086-f84aa3186757}" port="{3fdd198d-1cdd-48de-b105-e5763c05f103}"/>
+  </connection>
+  <connection type="[table]" uuid="{6c7243a6-5b1d-43a7-aafa-ed8b67db4903}">
+    <source node="{683978e7-5ed6-4f32-8a94-005acfb2139e}" port="{3a21e8e6-65eb-455b-a2cf-fb1a45de5cba}"/>
+    <destination node="{eab8089f-4256-42ee-805a-8cf1612afcab}" port="{5f8c9d58-a711-48e5-8851-e8d8a7366d46}"/>
+  </connection>
+  <connection type="[text]" uuid="{71faa7dc-40c3-4e3c-9ed2-5834b7faf834}">
+    <source node="{fe563915-9fed-4c24-beb8-8944bf1ca847}" port="{65bdcc07-db22-45ec-b54c-02b4dd2078f4}"/>
+    <destination node="{64100d60-7110-45d3-8d29-5c291b5a802c}" port="{48651e94-c859-4c94-904b-39d1ca8d2e2b}"/>
+  </connection>
+  <connection type="[table]" uuid="{987c915d-64b7-4b8e-b31b-82c4f00497ba}">
+    <source node="{64100d60-7110-45d3-8d29-5c291b5a802c}" port="{4338f618-d65e-4d85-a304-c138e924648a}"/>
+    <destination node="{f86a164f-ce21-4170-ae7d-a6c2de28c74a}" port="{81142c69-3c32-4a9b-8bc0-db0030688616}"/>
+  </connection>
+  <connection type="table" uuid="{a587c10a-694a-417d-a60f-7895face1eee}">
+    <source node="{4df986df-1eaa-422d-b79f-44c903b42a11}" port="{641c2ec3-17e7-42a9-92dd-09a8c8e799d5}"/>
+    <destination node="{fc91a387-9e5e-447a-a079-0700cb3e0a8e}" port="{cce3d249-28c7-4275-8642-98070ba62551}"/>
+  </connection>
+  <connection type="table" uuid="{b7605230-f7a6-45cb-a2bb-12a22e28acf2}">
+    <source node="{48099d23-a9bd-4209-a8af-859f2d786ba5}" port="{f9afec5b-dfc2-4c60-92ca-985951468da0}"/>
+    <destination node="{f86a164f-ce21-4170-ae7d-a6c2de28c74a}" port="{a3e10fa7-a84b-4ddc-8794-d8d67bc1328f}"/>
+  </connection>
+  <connection type="[table]" uuid="{d01baac2-f65c-4d34-8875-6a40790e0d7d}">
+    <source node="{02338f3c-27c5-4768-a307-ec6723cee9e3}" port="{bafc0680-331d-4ce4-bab1-693c370a6055}"/>
+    <destination node="{627fa892-8dcb-45b9-a627-e7a41c05a117}" port="{bfbbaa98-b96c-4bb9-9f38-e23e2ca7edec}"/>
+  </connection>
+  <connection type="table" uuid="{d046f7fb-73a8-441f-9132-f5078b57e797}">
+    <source node="{4df986df-1eaa-422d-b79f-44c903b42a11}" port="{641c2ec3-17e7-42a9-92dd-09a8c8e799d5}"/>
+    <destination node="{02338f3c-27c5-4768-a307-ec6723cee9e3}" port="{e75e86d0-1201-4606-acde-9d7ea7b5e48c}"/>
+  </connection>
+  <connection type="[datasource]" uuid="{d1474b8b-1317-4bf8-94f8-e6f499af34f5}">
+    <source node="{169e2aa4-e14d-4911-ba85-18ffd918ba13}" port="{46734d8a-9e00-4d84-99b8-da9b55de4b47}"/>
+    <destination node="{683978e7-5ed6-4f32-8a94-005acfb2139e}" port="{f68ad13f-7c89-4204-9320-76a528f8183e}"/>
+  </connection>
+  <connection type="[text]" uuid="{e278d5c2-1f0e-42a4-a2f1-680af16dcfc3}">
+    <source node="{fe563915-9fed-4c24-beb8-8944bf1ca847}" port="{65bdcc07-db22-45ec-b54c-02b4dd2078f4}"/>
+    <destination node="{169e2aa4-e14d-4911-ba85-18ffd918ba13}" port="{8686a841-d52f-4439-8557-e1687560afab}"/>
+  </connection>
+  <connection type="[table]" uuid="{ed31f6a0-6ed2-4e77-8b8e-18214cd734c1}">
+    <source node="{eab8089f-4256-42ee-805a-8cf1612afcab}" port="{c239425e-45ac-4a17-81cc-77b53b9c793d}"/>
+    <destination node="{c47301bb-e8e9-46d5-bff5-0bdfb581717e}" port="{a8da531e-7c28-4b9d-a94d-f15ef1f7763b}"/>
+  </connection>
+  <connection type="text" uuid="{ef16624e-defc-4240-9edc-960b30e36eaf}">
+    <source node="{7ecf8292-9faa-43ad-a82d-c2d877f89a1d}" port="{8f9757e0-954a-496e-8561-da3717ab8597}"/>
+    <destination node="{48099d23-a9bd-4209-a8af-859f2d786ba5}" port="{c3e5b44c-f9a9-4601-a34e-5e4458357ac0}"/>
+  </connection>
+  <connection type="[table]" uuid="{f275a5f3-64e0-4ff6-bef8-e84489e5bbae}">
+    <source node="{627fa892-8dcb-45b9-a627-e7a41c05a117}" port="{11decc80-098a-4e65-bef3-642ef51a9349}"/>
+    <destination node="{2aec3c8b-c43d-4d47-bf4f-4c9af012278c}" port="{cac20683-1e7b-44a0-90a8-c6a3999d94bf}"/>
+  </connection>
+  <text height="50.0" uuid="{8c6c41ef-bbac-43af-b19c-b00115b3afff}" width="100.0" x="1475.0" y="1875.0">Reference</text>
+  <text height="125.0" uuid="{c91d364d-a61e-4d7f-a14d-eaf337cc1013}" width="100.0" x="1475.0" y="2050.0">Test import vs reference and test that export produces valid output.</text>
+</flow>

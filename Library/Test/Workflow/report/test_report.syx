@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='ASCII'?>
+<flow xmlns="http://www.sysess.org/sympathyfordata/workflow/1.0" cls="Flow" height="50.0" id="" is_locked="False" uuid="{dcaa9b70-432c-4532-bc26-422f317e7a65}" width="50.0" x="0.0" y="0.0">
+  <label>test_report.syx</label>
+  <description></description>
+  <author>Unknown</author>
+  <copyright></copyright>
+  <version>1.0</version>
+  <source></source>
+  <ports/>
+  <aggregation type="json"><![CDATA[null]]></aggregation>
+  <parameters type="json"><![CDATA[{}]]></parameters>
+  <node height="50.0" id="org.sysess.sympathy.data.table.settablesname" uuid="{46dc62d4-097a-455c-bf1b-3354cbf71c94}" width="50.0" x="1925.0" y="1950.0">
+    <label>Set Tables Name</label>
+    <description>Set the name of a list of Tables</description>
+    <author>Greger Cronquist &lt;greger.cronquist@sysess.org&gt;</author>
+    <copyright>(c) 2013 Sysem Engineering Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"type": "group", "name": {"description": "Name to assign to the table(s).", "value": "data", "label": "Name", "editor": null, "type": "string", "order": 0}}]]></parameters>
+    <ports>
+      <input key="" requiresdata="False" scheme="hdf5" type="[table]" uuid="{8820e58f-0d25-4c4b-98c4-784faceed995}">
+        <label>Input</label>
+        <description>Input</description>
+      </input>
+      <output key="" requiresdata="False" scheme="hdf5" type="[table]" uuid="{7c7507b0-f061-40e0-b4d8-420be7a55152}">
+        <label>Output</label>
+        <description>Output</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.random.randomtables" uuid="{54bafe2f-935f-4973-b3e5-50a00427ba3e}" width="50.0" x="1775.0" y="1950.0">
+    <label>Random Tables</label>
+    <description>Random Tables generator.</description>
+    <author>Erik der Hagopian &lt;erik.hagopian@combine.se&gt;</author>
+    <copyright>(c) 2013 Combine AB</copyright>
+    <version>0.1</version>
+    <parameters type="json"><![CDATA[{"column_length": {"description": "The length of columns to be generated.", "value": 1000, "label": "Column length", "editor": {"max": 100000000, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 1}, "column_entries": {"description": "The number of column entries to be generated.", "value": 100, "label": "Column entries", "editor": {"max": 1000000, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 0}, "length": {"description": "The length of table list to be generated.", "value": 1, "label": "Table list length", "editor": {"max": 10000, "step": 1, "type": "spinbox", "min": 0}, "type": "integer", "order": 2}, "type": "group"}]]></parameters>
+    <ports>
+      <output key="port0" requiresdata="False" scheme="hdf5" type="[table]" uuid="{273aeda4-5627-4f99-bf32-8ca2728d12da}">
+        <label>File</label>
+        <description>File</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.report.apply.tables" uuid="{608d3494-72a6-4876-9294-05e308fb98ea}" width="50.0" x="2225.0" y="1950.0">
+    <label>Report Apply Tables</label>
+    <description></description>
+    <author>Stefan Larsson &lt;stefan.larsson@combine.se&gt;</author>
+    <copyright>(C) 2014 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"filename_prefix": {"description": "Prefix of saved files.", "value": "report_test_output", "label": "Filename Prefix", "editor": null, "type": "string", "order": 1}, "type": "group", "signal_mapping": {"description": "Mapping of incoming signal names to template signal names.", "value": "{}", "label": "Signal Mapping", "editor": null, "type": "string", "order": 3}, "save_path": {"description": "Path to save report pages to.", "value": ".", "label": "Save Path", "editor": {"type": "dirname"}, "type": "string", "order": 0}, "file_format": {"description": "File format of exported pages.", "passthrough": false, "list": ["png", "jpg"], "value": [0], "label": "File Format", "editor": {"type": "combobox"}, "value_names": [], "type": "list", "order": 2}}]]></parameters>
+    <ports>
+      <input key="template" requiresdata="False" scheme="text" type="report" uuid="{0cce683a-985e-426b-8234-233fae5cd17f}">
+        <label>Report template</label>
+        <description>Report template</description>
+      </input>
+      <input key="tables" requiresdata="False" scheme="hdf5" type="[table]" uuid="{9bea4d7c-ecc6-4a4e-bab4-5b2a2b6228c6}">
+        <label>List of tables</label>
+        <description>List of tables</description>
+      </input>
+      <output key="dsrc" requiresdata="False" scheme="text" type="[datasource]" uuid="{d47964ee-2d10-4dd6-a79e-d56d83b89550}">
+        <label>Output files</label>
+        <description>Output files</description>
+      </output>
+    </ports>
+  </node>
+  <node height="50.0" id="org.sysess.sympathy.report.template.tables" uuid="{f164f187-3798-473d-847a-b9fa97349ec8}" width="50.0" x="2075.0" y="1875.0">
+    <label>Report Template Tables</label>
+    <description></description>
+    <author>Stefan Larsson &lt;stefan.larsson@combine.se&gt;</author>
+    <copyright>(C) 2014 System Engineering Software Society</copyright>
+    <version>1.0</version>
+    <parameters type="json"><![CDATA[{"document": {"description": "JSON-data containing description of template.", "value": "{\"scales\": [], \"signals\": [], \"version\": 1, \"type\": \"root\", \"pages\": [{\"content\": [{\"items\": [{\"width\": 0, \"text\": \"Simple text\", \"height\": 0, \"halign\": \"center\", \"valign\": \"center\", \"type\": \"textbox\", \"id\": \"new-textbox\"}], \"kind\": \"horizontal\", \"type\": \"layout\"}], \"thumbnail\": null, \"type\": \"page\", \"uuid\": \"{58b824ca-5312-402b-b917-bb8bab94c9cb}\", \"title\": \"Simple page\"}, {\"content\": [{\"items\": [{\"layers\": [{\"edgecolor\": \"#000000\", \"name\": \"Heatmap Plot\", \"color\": \"pink\", \"data\": [{\"source\": \"data.17\", \"axis\": \"x-axis\"}, {\"source\": \"data.12\", \"axis\": \"y-axis\"}], \"reduce-func\": \"count\", \"draw_edges\": false, \"y-bin-count\": 10, \"x-bin-count\": 10, \"smoothing\": \"nearest\", \"colorbar\": true, \"z-source\": \"\", \"draw-numbers\": false, \"alpha\": 1.0, \"type\": \"histogram2d\"}], \"dimensions\": [[{\"title\": \"\", \"max\": 1.0, \"min\": 0.0, \"extent\": true, \"id\": \"x-axis\", \"scale_type\": \"linear\"}], [{\"title\": \"\", \"max\": 1.0, \"min\": 0.0, \"extent\": true, \"id\": \"y-axis\", \"scale_type\": \"linear\"}]], \"title\": \"New Graph\", \"height\": 400, \"width\": 400, \"grid\": false, \"type\": \"graph\", \"id\": \"new-graph\", \"projection\": \"cartesian\"}], \"kind\": \"horizontal\", \"type\": \"layout\"}], \"thumbnail\": null, \"type\": \"page\", \"uuid\": \"{e77334d1-1eca-42be-a034-98e33f8ef727}\", \"title\": \"Awesome page\"}], \"sytype\": \"report\"}", "label": "Document", "editor": null, "type": "string", "order": 0}, "type": "group"}]]></parameters>
+    <ports>
+      <input key="tables" requiresdata="False" scheme="hdf5" type="[table]" uuid="{690e756f-770b-407a-8dda-d1235c187ab6}">
+        <label>TableList</label>
+        <description>TableList</description>
+      </input>
+      <output key="template" requiresdata="False" scheme="text" type="report" uuid="{e3120759-75d2-4d3e-9f48-b4590c633fb3}">
+        <label>ReportTemplate</label>
+        <description>ReportTemplate</description>
+      </output>
+    </ports>
+  </node>
+  <connection uuid="{01808bd9-e1d1-41f5-a20b-e783a40b0c20}">
+    <source node="{46dc62d4-097a-455c-bf1b-3354cbf71c94}" port="{7c7507b0-f061-40e0-b4d8-420be7a55152}"/>
+    <destination node="{608d3494-72a6-4876-9294-05e308fb98ea}" port="{9bea4d7c-ecc6-4a4e-bab4-5b2a2b6228c6}"/>
+  </connection>
+  <connection uuid="{46ba0356-73d7-42d8-816a-9f5e7ab3888f}">
+    <source node="{54bafe2f-935f-4973-b3e5-50a00427ba3e}" port="{273aeda4-5627-4f99-bf32-8ca2728d12da}"/>
+    <destination node="{46dc62d4-097a-455c-bf1b-3354cbf71c94}" port="{8820e58f-0d25-4c4b-98c4-784faceed995}"/>
+  </connection>
+  <connection uuid="{801368aa-3773-46ac-a6f6-0dc1fc935979}">
+    <source node="{f164f187-3798-473d-847a-b9fa97349ec8}" port="{e3120759-75d2-4d3e-9f48-b4590c633fb3}"/>
+    <destination node="{608d3494-72a6-4876-9294-05e308fb98ea}" port="{0cce683a-985e-426b-8234-233fae5cd17f}"/>
+  </connection>
+  <connection uuid="{af1974f1-a2b4-4ecc-901b-1d7e4ba79cfe}">
+    <source node="{46dc62d4-097a-455c-bf1b-3354cbf71c94}" port="{7c7507b0-f061-40e0-b4d8-420be7a55152}"/>
+    <destination node="{f164f187-3798-473d-847a-b9fa97349ec8}" port="{690e756f-770b-407a-8dda-d1235c187ab6}"/>
+  </connection>
+</flow>
